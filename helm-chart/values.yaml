@@ -16,7 +16,7 @@ acendTraining:
         annotations: 
           kubernetes.io/ingress.class: nginx-public
         secretOverride: acend-wildcard
-        appname: go-basics-training
+        appname: go-basics
         domain: training.acend.ch
 
 
