@@ -15,6 +15,11 @@
   },
   "MD024": false,
   "MD031": false,
+  "MD033": {
+    "allowed_elements": [
+        "go-playground"
+    ]
+  },
   "MD034": false,
   "MD035": {
     "style": "---"

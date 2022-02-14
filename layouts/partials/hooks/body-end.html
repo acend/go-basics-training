@@ -1,0 +1,28 @@
+{{ $jsCodeCopy := resources.Get "js/code-copy.js" }}
+{{ $jsModeSwitcher := resources.Get "js/mode-switcher.js" }}
+{{ $jsModeSwitcher = $jsModeSwitcher | resources.ExecuteAsTemplate "mode-switcher.js" . }}
+{{ $jsLibs := slice $jsCodeCopy $jsModeSwitcher }}
+
+{{ if .Site.Params.ReplaceContent.Placeholders }}
+  {{ $jsReplaceContent := resources.Get "js/replace-content.js" }}
+  {{ $jsReplaceContent = $jsReplaceContent | resources.ExecuteAsTemplate "replace-content.js" . }}
+  {{ $jsLibs = $jsLibs | append $jsReplaceContent }}
+{{ end }}
+
+{{ if .HasShortcode "go-playground" }}
+  {{ $jsGoPlayground := resources.Get "js/go-playground.js" }}
+  {{ $jsGoPlaygroundCustom := resources.Get "js/go-playground-custom.js" }}
+  {{ $jsPlaygroundBundle := slice $jsGoPlayground $jsGoPlaygroundCustom | resources.Concat "js/playground.js" | fingerprint}}
+  <!-- This needs to be a separate script, because HasShortcode is per page and not global -->
+  <script src="{{ $jsPlaygroundBundle.RelPermalink }}"></script>
+{{ end }}
+
+{{ $jsSite := $jsLibs | resources.Concat "js/site.js" }}
+
+{{ if .Site.IsServer }}
+  {{ $jsSite := $jsSite | fingerprint }}
+  <script src="{{ $jsSite.RelPermalink }}"></script>
+{{ else }}
+  {{ $jsSite := $jsSite | minify | fingerprint }}
+  <script src="{{ $jsSite.RelPermalink }}" integrity="{{ $jsSite.Data.Integrity }}" crossorigin="anonymous"></script>
+{{ end }}
