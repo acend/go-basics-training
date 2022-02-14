@@ -78,6 +78,8 @@ enabledModule = "base"
 # Enable Lunr.js offline search
 offlineSearch = true
 
+automaticSectionNumbers = true
+
 [params.ui]
 # Enable to show the side bar menu in its compact state.
 sidebar_menu_compact = false

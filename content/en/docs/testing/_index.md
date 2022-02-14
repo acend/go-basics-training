@@ -1,7 +1,6 @@
 ---
-title: "1. Go Basics Sample Chapter"
-weight: 1
-sectionnumber: 1
+title: "Testing"
+weight: 15
 ---
 
 ## Title 1
@@ -56,7 +55,7 @@ foo: bar
 ```
 
 
-## Task 1.1: Fix Deployment
+## {{%task%}} Fix Deployment
 
 
 ```yaml
@@ -64,7 +63,7 @@ foo: bar
 ```
 
 
-## Task 1.2: Fix Release
+## {{%task%}} Fix Release
 
 
 ```yaml
@@ -72,7 +71,7 @@ foo: bar
 ```
 
 
-## Task 1.3: Fix Release again
+## {{%task%}} Fix Release again
 
 
 ```yaml
@@ -80,7 +79,7 @@ foo: bar
 ```
 
 
-## Task 1.4: Fix Release again and again
+## {{%task%}} Fix Release again and again
 
 
 ```yaml

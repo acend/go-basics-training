@@ -1,0 +1,31 @@
+{{ $navRoot := cond (and (ne .Params.toc_root true) (eq .Site.Home.Type "docs")) .Site.Home .FirstSection -}}
+{{ $data := newScratch }}
+{{ $data = partial "sectionnumber-nested" (dict "page" . "section" $navRoot "data" $data) }}
+{{ return $data }}
+
+{{ define "partials/sectionnumber-nested" -}}
+{{ $s := .section }}
+{{ $p := .page }}
+{{ $d := .data }}
+{{ $sectionNr := .sectionNr | default "" }}
+{{ $pages := (union .section.Pages $s.Sections).ByWeight -}}
+{{ $withChild := gt (len $pages) 0 -}}
+  {{ $sectionNr }}{{ $s }}
+  {{ .data.Set $s.File.Path $sectionNr }}
+  {{- if $withChild }}
+    {{ range $index, $item := $pages -}}
+      {{ $onlyWhen := default "base" $item.Params.onlyWhen }}
+      {{ if and (in site.Params.enabledModule $onlyWhen) (not (in site.Params.enabledModule $item.Params.onlyWhenNot)) }}
+      {{ if (not (and (eq $s site.Home) (eq $item.Params.toc_root true))) -}}
+        {{ $prefix := $sectionNr }}
+        {{ if $sectionNr }}
+          {{ $prefix = add $sectionNr "." }}
+        {{ end }}
+        {{ $newSectionNr := (add $prefix (string (add $index 1))) }}
+        {{ $d = partial "sectionnumber-nested" (dict "page" $p "section" $item "sectionNr" $newSectionNr "data" $d) }}
+      {{- end }}
+      {{- end }}
+      {{- end }}
+    {{- end }}
+    {{ return $d }}
+{{- end }}
