@@ -40,7 +40,11 @@ If you don't use VS Code you can skip this section. This section will briefly de
 * Start VS Code and open the extensions menu on the left side
 * Search for the Go extension and install it
 
+![](vs_code_golang_extension.png "VS Code extension")
+
 The first time you open a Go file the Go plugin will show a warning to you that certain tools are missing. Click on "Install All" to install all missing tools. This will take some time.
+
+![](vs_code_golang_extension_error_message.png "Alt text")
 
 
 ## Hello World
@@ -64,7 +68,7 @@ func main() {
 }
 ```
 
-The name of the file doesn't matter but it is common to call the file with the the main function `main.go`. The only important thing for now is, that we have a package `main` and a function `main()` which is the entrypoint for our program. In a later chapter we will learn more about packages and project structure in general. To get familiar with the basic syntax of Go, a single package `main` should be enough.
+The name of the file doesn't matter but it is common to call the file which contains the main function `main.go`. The only important thing for now is, that we have a package `main` and a function `main()` which is the entrypoint for our program. In a later chapter we will learn more about packages and the project structure in general. To get familiar with the basic syntax of Go, a single package `main` should be enough.
 
 Open a terminal and make sure you are in the `hello/` directory. Then you can run the following commands to build your program and run it:
 ```shell
