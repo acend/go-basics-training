@@ -4,18 +4,13 @@ weight: 200
 ---
 
 This chapter will give you an overview of the most important language features of Go.
-This is only an overview and by no means a complete list.
 Since it is hard to learn a lot of new language features at once, we deliberatly left out certain constructs which, based on our expirience, are not used very often and which are not required most of the time.
-But even with this limited selection of features you should be able to understand most of the Go programs and solve a wide range of programming problems.
 
 If you are intressted in more details when going over the topics or when you come across a syntax construct somewhere else which we did not cover you can always reach out to the official Go resources which cover every feature in great detail:
 
 * The [Tour of Go](https://go.dev/tour/list) is similar to the overview in this chapter but it covers more details. It goes over most of the language features by looking at small examples.
-***(TODO: do we even want to mention this option ->) If you prefer to learn more features you can also do the Tour of Go (until Methods and interfaces) instead of going over the Overview here. But only take this path if you are confident that you are fast enough. Another optioin would be that you start looking into the Tour of Go if you finished the overview chapter early.***
 * [Go Language Specification](https://go.dev/ref/spec)
 
 Learning a new language is hard. You will be bombarded by new information and concepts. Remember that the primary goal is to get to know which features are available and not to memorize every little detail. You will probably have to come back to these earlier exercises later in this course. 
 
 Ask questions if something is unclear, use Google and make your own notes.
-If you need a certain feature later in the course, but don't remember the syntax, you can always go back and look it up.
-Later in the course it can also help to have a cheatsheet at hand to quickly lookup the syntax you need (e.g. https://devhints.io/go)
