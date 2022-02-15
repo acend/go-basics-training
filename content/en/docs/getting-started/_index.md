@@ -18,7 +18,7 @@ To develop programs with Go you need the following things:
 
 ### Install Go
 
-To install Go follow the official installation instructions under https://go.dev/doc/install. After the installation you can verify if everything works ok by running `go version` in a terminal.
+To install Go follow the official installation instructions at https://go.dev/doc/install. After the installation you can verify if everything works by running `go version` in a terminal.
 
 
 ### Editor
