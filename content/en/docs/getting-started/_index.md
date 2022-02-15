@@ -29,7 +29,7 @@ However, among Go developers certain editors are more popular than others and he
 * VS Code (41%)
 * GoLand / IntelliJ (35%)
 
-For this course it doesn't matter which editor you use. If you are not sure which editor to choose, we recommend you to use VS Code. It is available for free and provides very good support for Go with the official Go extension provided by the Go project.
+For this course it doesn't matter which editor you use. If you are not sure which editor to choose, we recommend you use VS Code. It is available for free and there is an official Go extension.
 
 
 #### VS Code (optional)
