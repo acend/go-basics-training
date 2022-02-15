@@ -1,87 +1,63 @@
 ---
-title: "Testing"
-weight: 15
+title: "Tests"
+weight: 400
 ---
 
-## Title 1
+## Writing Tests
 
-{{% alert title="Note" color="primary" %}}
-Sample Note
-{{% /alert %}}
+```golang
+package main
 
-Sample code block:
-```bash
-echo "Hello World!"
-```
+import "testing"
 
-{{% onlyWhen variant1 %}}
-This is only rendered when `enabledModule` in `config.toml` contains `variant1`.
-{{% /onlyWhen %}}
+func TestAdd(t *testing.T) {
+	exp := 5
 
-{{% onlyWhen variant2 %}}
-This is only rendered when `enabledModule` in `config.toml` contains `variant2`.
-{{% /onlyWhen %}}
-
-{{% onlyWhen variant1 variant2 %}}
-This is only rendered when `enabledModule` in `config.toml` contains `variant1` or `variant2`.
-{{% /onlyWhen %}}
-
-{{% onlyWhen variant9 %}}
-This is only rendered when `enabledModule` in `config.toml` contains `variant9`.
-{{% /onlyWhen %}}
-
-{{% onlyWhenNot variant1 %}}
-This is only rendered when `enabledModule` in `config.toml` **does not** contain `variant1`.
-{{% /onlyWhen %}}
-
-{{% onlyWhenNot variant2 %}}
-This is only rendered when `enabledModule` in `config.toml` **does not** contain `variant2`.
-{{% /onlyWhen %}}
-
-{{% onlyWhenNot variant1 variant2 %}}
-This is only rendered when `enabledModule` in `config.toml` **does not** contain `variant1` **nor** `variant2`.
-{{% /onlyWhen %}}
-
-{{% onlyWhenNot variant9 %}}
-This is only rendered when `enabledModule` in `config.toml` **does not** contain `variant9`.
-{{% /onlyWhen %}}
-
-
-## Title 2
-
-
-```yaml
-foo: bar
+	res := Add(2, 3)
+	
+	if res != exp {
+		t.Fatalf("got=%d, want=%d", res, exp)
+	}
+}
 ```
 
 
-## {{%task%}} Fix Deployment
+## Running tests
 
+```shell
+go test
 
-```yaml
-foo: bar
+go test ./...
+
+# single test
+
+# no cache
 ```
 
 
-## {{%task%}} Fix Release
+## Tricks
 
 
-```yaml
-foo: bar
-```
+### Compare structs and slices
+
+TODO reflect.DeepEqual
 
 
-## {{%task%}} Fix Release again
+### Table driven tests
+
+TODO
 
 
-```yaml
-foo: bar
-```
+## Coverage
+
+TODO
 
 
-## {{%task%}} Fix Release again and again
+## Best practices
+
+* mitchellh https://www.youtube.com/watch?v=8hQG7QlcLBk)
 
 
-```yaml
-foo: bart
-```
+## Libraries
+
+* https://github.com/stretchr/testify
