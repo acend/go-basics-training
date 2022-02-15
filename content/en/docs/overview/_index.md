@@ -3,7 +3,7 @@ title: "Overview"
 weight: 200
 ---
 
-In this chapter, we're going to get an overview which covers the most important language features of Go.
+This chapter will give you an overview of the most important language features of Go.
 This is only an overview and by no means a complete list.
 Since it is hard to learn a lot of new language features at once, we deliberatly left out certain constructs which, based on our expirience, are not used very often and which are not required most of the time.
 But even with this limited selection of features you should be able to understand most of the Go programs and solve a wide range of programming problems.
