@@ -14,6 +14,8 @@ If you are intressted in more details when going over the topics or when you com
 ***(TODO: do we even want to mention this option ->) If you prefer to learn more features you can also do the Tour of Go (until Methods and interfaces) instead of going over the Overview here. But only take this path if you are confident that you are fast enough. Another optioin would be that you start looking into the Tour of Go if you finished the overview chapter early.***
 * [Go Language Specification](https://go.dev/ref/spec)
 
-Even though we tried to reduce the content in this chapter, there will be a lot of new information. But don' panic. You don't have to remember all of it. The primary goal is to have heard these features and to get a feel for the language with the exercises/labs.
+Learning a new language is hard. You will be bombarded by new information and concepts. Remember that the primary goal is to get to know which features are available and not to memorize every little detail. You will probably have to come back to these earlier exercises later in this course. 
+
+Ask questions if something is unclear, use Google and make your own notes.
 If you need a certain feature later in the course, but don't remember the syntax, you can always go back and look it up.
 Later in the course it can also help to have a cheatsheet at hand to quickly lookup the syntax you need (e.g. https://devhints.io/go)
