@@ -68,11 +68,12 @@ func main() {
 }
 ```
 
-The name of the file doesn't matter but it is common to call the file which contains the main function `main.go`. The only important thing for now is, that we have a package `main` and a function `main()` which is the entrypoint for our program. In a later chapter we will learn more about packages and the project structure in general. To get familiar with the basic syntax of Go, a single package `main` should be enough.
+This file contains the main function which is the entrypoint for our application. We will learn about packages and the project structure in general later in this course.
 
 Open a terminal and make sure you are in the `hello/` directory. Execute the following commands to build and run your program:
 ```shell
 go build
+
 # Linux / Mac
 ./hello
 
