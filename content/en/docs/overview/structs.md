@@ -220,5 +220,4 @@ func NewPerson(firstName string, lastName string, age int) person {
 func main() {
     chrigu := NewPerson("Christian", "Müller", 28)
     chrigu.fullName()
-}
 ```
