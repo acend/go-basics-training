@@ -45,7 +45,7 @@ func main() {
 
 ## Multiple Return Values
 
-A function can return multiple values. The following example contains a function `sub`, which return two values:
+A function can return multiple values. The following example contains a function `sub`, which returns two values:
 
 1. The result of the subtraction of `a` and `b`
 2. A boolean which indicates if the result is negative
@@ -67,26 +67,41 @@ func main() {
 }
 ```
 
-If we don't need a certain return value we can discard it by assigning it to `_`:
+If we only need certain return values we can discard values by assigning them to `_`:
 ```golang
 	result, _ := sub(2, 3)
 ```
 
 
 ## Returning Errors
+
 {{% alert title="Note" color="primary" %}}
 In this section we only cover the basics on error handling. There is a seperate chapter *Error handling** which covers the topic in more depth.
 {{% /alert %}}
 
 If a function can fail it returns an error value as its last return value.
-In many other languages exceptions are thrown to indicate an error condition. Go does not have exceptions. Errors are retunred from functions like every other value.
+In many other languages exceptions are thrown to indicate an error condition. Go does not have exceptions. Errors are retunred from functions like every other return value.
 
-Let's take a look at the function `os.ReadFile` from the Go standard library. It's signature looks like this:
+Let's take a look at the function `ReadFile` from the `os` package in the Go standard library. It's signature looks like this:
 ```golang
 func ReadFile(name string) ([]byte, error)
 ```
 
-It returns the content and an error. Ignore the content and its type `[]byte` for now and just focus on the error. The signature tells us that something in the function can go wrong (file does not exist, no permission to read file, etc.).
+In the function signature we see that the last return value is of type `error`. So we know that the function could fail. In the case of `ReadFile` possible errors could be that the file does not exist or that we do not have enough permission to read the file.
+
+We can handle errors by checking if the error value is set (not `nil`). The following pattern you will see all the time when developing Go.
+```golang
+content, err := os.ReadFile("test.txt")
+if err != nil {
+	// handle error
+}
+```
+
+In many cases handling the error means:
+
+* Passing an error up to the caller
+* Logging an error and abort the running action
+
 
 ```golang
 package main
@@ -99,44 +114,33 @@ import (
 func main() {
 	fileContent, err := os.ReadFile("test.txt")
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("could not read file", err)
 		os.Exit(1)
 	}
 	fmt.Println(fileContent)
-	defer f.Close()
 }
 ```
 
 
-## Defer
+## Function As Values
 
-```
+In Go functions are first-class values. This means that you can pass functions around like ordinary values.
+
+```golang
 package main
 
-import (
-	"os"
-	"fmt"
-)
+import "fmt"
+
+// run takes a function myfunc and runs it with a and b
+func run(a int, b int, myfunc func(int, int) int) int {
+	return myfunc(a, b)
+}
 
 func main() {
-	file, err := os.Open("test.txt")
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	defer file.Close()
-	// do stuff with file
-```
-
-
-## Variadic
-
-```
-func sum(nums ...int) int {
-	result := 0
-	for _, i := range nums {
-		res += i
-	}
-	return result
+	add := func(a int, b int) int { return a + b }
+	sub := func(a int, b int) int { return a - b }
+	result1 := run(2, 3, add)
+	result2 := sub(2, 3)
+	fmt.Println(result1, result2)
 }
 ```
