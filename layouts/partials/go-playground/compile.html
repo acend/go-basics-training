@@ -1,0 +1,16 @@
+{{ $query := slice "version" "2" "body" .code "withVet" "true" }}
+{{ $opts := dict
+  "method" "post"
+  "headers" (dict "Content-Type" "application/x-www-form-urlencoded")
+  "body" (querify $query)
+}}
+{{ $postResponse := resources.GetRemote "https://go.dev/_/compile" $opts }}
+{{ $content := $postResponse.Content | transform.Unmarshal }}
+{{ if $content.Errors }}
+  {{ warnf "Golang error occurred in %v:%v:\n%v" .this.Page.File.Path .this.Position.LineNumber $content.Errors }}
+{{ end }}
+{{ $output := "" }}
+{{ range $content.Events }}
+    {{ $output = printf "%s%s" $output .Message }}
+{{ end }}
+{{ return $output }}

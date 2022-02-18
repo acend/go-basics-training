@@ -1,0 +1,6 @@
+{{ $opts := dict
+  "method" "post"
+  "body" .
+}}
+{{ $postResponse := resources.GetRemote "https://go.dev/_/share" $opts }}
+{{ return $postResponse.Content }}

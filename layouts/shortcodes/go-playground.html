@@ -1,9 +1,45 @@
-<div class="go-playground">
-  <textarea class="code">
-    {{ .Inner }}
-  </textarea>
-  <br />
-  <button class="run">Run</button>
-  <br />
-  <pre class="output">Output</pre>
+{{ $split := split .Inner "<!--output-->" }}
+{{ $code := index $split 0 }}
+{{ $code = trim $code "\n" }}
+{{ $output := "" }}
+{{ if eq (len $split) 2 }}
+    {{ $output = index $split 1 }}
+    {{ $output = strings.TrimPrefix "\n" $output }}
+{{ end }}
+
+{{ $withoutBoilerplate := false }}
+{{ if not (hasPrefix $code "package main") }}
+    {{ $code = printf "package main\nimport \"fmt\"\nfunc main() {\n%v\n}" $code }}
+    {{ $withoutBoilerplate = true }}
+{{ end }}
+
+{{ $code := partial "go-playground/fmt.html" $code }}
+{{ $share := partial "go-playground/share.html" $code }}
+
+{{ $compiledOutput := partial "go-playground/compile.html" (dict "this" . "code" $code) }}
+{{ if ne $compiledOutput $output }}
+  {{ if $output }}
+    {{ warnf "Wrong output received from Go Playground in %v:%v:\ngot:\n%vwant:\n%v" .Page.File.Path .Position.LineNumber $compiledOutput $output }}
+  {{ else }}
+    {{ warnf "Received unexpected output from Go Playground. Add an `<!--output-->` block in %v:%v:\ngot:\n%v" .Page.File.Path .Position.LineNumber $compiledOutput }}
+  {{ end }}
+{{ end }}
+
+{{ if $withoutBoilerplate }}
+    {{/* After formatting, we want to remove the boilerplate again */}}
+    {{ $code = strings.TrimPrefix "package main\n\nimport \"fmt\"\n\nfunc main() {\n" $code }}
+    {{ $code = strings.TrimSuffix "}\n" $code }}
+
+    {{/* Trim first tab from every line */}}
+    {{ $code = split $code "\n" }}
+    {{ $code = apply $code "strings.TrimPrefix" "\t" "." }}
+    {{ $code = delimit $code "\n" }}
+{{ end }}
+
+<div data-playground="{{ $share }}">
+{{- transform.Highlight $code "go" -}}
+Output:
+<pre class="output">
+{{ $output }}
+</pre>
 </div>
