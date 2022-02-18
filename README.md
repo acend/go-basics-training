@@ -6,9 +6,9 @@ Go Basics Training Description
 ## Shortcodes
 
 ```
-{{<optional title="Some title">}}
+{{%optional title="Some title"%}}
 Some additional information that is not required
-{{</optional>}}
+{{%/optional%}}
 ```
 
 

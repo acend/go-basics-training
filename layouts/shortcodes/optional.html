@@ -1,5 +1,5 @@
 {{- $title := .Get "title" -}}
 <details class="optional">
   <summary>{{with $title }}Optional: {{.}}{{else}}Optional: Click to expand{{end}}</summary>
-  {{.Inner | markdownify}}
+  {{ .Inner }}
 </details>

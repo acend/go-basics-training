@@ -21,7 +21,8 @@
   "MD033": {
     "allowed_elements": [
         "go-playground",
-        "optional"
+        "optional",
+        "link"
     ]
   },
   "MD034": false,
