@@ -3,7 +3,7 @@ title = "Go Basics Training"
 
 enableGitInfo = true
 
-theme = ["docsy-acend", "docsy-plus", "docsy"]
+theme = ["docsy-acend", "github.com/acend/docsy-plus"]
 
 languageCode = "en-us"
 
