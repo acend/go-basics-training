@@ -16,13 +16,13 @@
 {{ $code := partial "go-playground/fmt.html" $code }}
 {{ $share := partial "go-playground/share.html" $code }}
 
-{{ $compiledOutput := partial "go-playground/compile.html" (dict "this" . "code" $code) }}
-{{ if ne $compiledOutput $output }}
-  {{ if $output }}
+{{ $compiledOutput := "" }}
+{{ if $output }}
+{{ $compiledOutput = partial "go-playground/compile.html" (dict "this" . "code" $code) }}
+{{ end }}
+
+{{ if and $output (ne $compiledOutput $output) }}
     {{ warnf "Wrong output received from Go Playground in %v:%v:\ngot:\n%vwant:\n%v" .Page.File.Path .Position.LineNumber $compiledOutput $output }}
-  {{ else }}
-    {{ warnf "Received unexpected output from Go Playground. Add an `<!--output-->` block in %v:%v:\ngot:\n%v" .Page.File.Path .Position.LineNumber $compiledOutput }}
-  {{ end }}
 {{ end }}
 
 {{ if $withoutBoilerplate }}
@@ -38,8 +38,10 @@
 
 <div data-playground="{{ $share }}">
 {{- transform.Highlight $code "go" -}}
+{{ if $output }}
 Output:
 <pre class="output">
 {{ $output }}
 </pre>
+{{ end }}
 </div>
