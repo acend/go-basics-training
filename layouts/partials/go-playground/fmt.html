@@ -1,0 +1,9 @@
+{{ $query := slice "body" . "imports" "true" }}
+{{ $opts := dict
+  "method" "post"
+  "headers" (dict "Content-Type" "application/x-www-form-urlencoded")
+  "body" (querify $query)
+}}
+{{ $postResponse := resources.GetRemote "https://go.dev/_/fmt" $opts }}
+{{ $content := $postResponse.Content | transform.Unmarshal }}
+{{ return $content.Body }}
