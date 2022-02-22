@@ -7,6 +7,11 @@ menu:
 
 ## Lab Introduction
 
+{{<optional title="This is something optional">}}
+This is opitonal
+{{</optional>}}
+
+
 {{<go-playground>}}
 package main
 
