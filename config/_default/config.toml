@@ -38,6 +38,11 @@ hrefTargetBlank = true
 angledQuotes = false
 latexDashes = true
 
+# Enable to add Go Playground request cache to Git
+#[caches]
+#[caches.getresource]
+#dir = ':resourceDir/_cache'
+
 # Image processing configuration.
 [imaging]
 resampleFilter = "CatmullRom"
