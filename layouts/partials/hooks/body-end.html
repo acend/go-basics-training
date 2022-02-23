@@ -10,11 +10,28 @@
 {{ end }}
 
 {{ if .HasShortcode "go-playground" }}
-  {{ $jsGoPlayground := resources.Get "js/go-playground.js" }}
-  {{ $jsGoPlaygroundCustom := resources.Get "js/go-playground-custom.js" }}
-  {{ $jsPlaygroundBundle := slice $jsGoPlayground $jsGoPlaygroundCustom | resources.Concat "js/playground.js" | fingerprint}}
+  {{ $jsCodeRun := resources.Get "js/code-run.js" }}
   <!-- This needs to be a separate script, because HasShortcode is per page and not global -->
-  <script src="{{ $jsPlaygroundBundle.RelPermalink }}"></script>
+<style>
+.highlight-run-btn {
+    position: absolute;
+    bottom: 7px;
+    right: 70px;
+    border: 0;
+    border-radius: 4px;
+    padding: 1px;
+    font-size: 0.7em;
+    line-height: 1.8;
+    color: white;
+    background-color: #777;
+    min-width: 55px;
+    text-align: center;
+}
+.highlight-run-btn:hover {
+    background-color: #666;
+}
+</style>
+  <script src="{{ $jsCodeRun.RelPermalink }}"></script>
 {{ end }}
 
 {{ $jsSite := $jsLibs | resources.Concat "js/site.js" }}

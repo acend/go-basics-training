@@ -7,16 +7,28 @@ menu:
 
 ## Lab Introduction
 
+{{<optional title="This is something optional">}}
+This is opitonal
+{{</optional>}}
+
+
 {{<go-playground>}}
 package main
 
 import (
+    "time"
     "fmt"
 )
 
 func main() {
-    fmt.Println("hello")
+    fmt.Println("hello6\nworld")
+    time.Sleep(10)
+    fmt.Println("hello7")
 }
+<!--output-->
+hello6
+world
+hello7
 {{</go-playground>}}
 
 {{<go-playground>}}
@@ -29,4 +41,10 @@ import (
 func main() {
     fmt.Println("world")
 }
+<!--output-->
+world
+{{</go-playground>}}
+
+{{<go-playground>}}
+fmt.Println("test")
 {{</go-playground>}}
