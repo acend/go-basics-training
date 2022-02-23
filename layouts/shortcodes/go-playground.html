@@ -1,3 +1,5 @@
+{{ $hlLines := .Get "hl_lines" }}
+{{ $lineNos := .Get "lineNos" }}
 {{ $split := split .Inner "<!--output-->" }}
 {{ $code := index $split 0 }}
 {{ $code = trim $code "\n" }}
@@ -36,8 +38,25 @@
     {{ $code = delimit $code "\n" }}
 {{ end }}
 
+{{/* We split the options into separate shortcode params,
+     because the highlight function silently fails if unknown
+     options are passed. */}}
+{{ $options := slice }}
+{{ with $hlLines }}
+    {{ $options = $options | append (printf "hl_lines=%v" .) }}
+{{ end }}
+{{ with $lineNos }}
+    {{ $options = $options | append (printf "lineNos=%v" .) }}
+{{ else }}
+    {{ $options = $options | append "lineNos=true" }}
+{{ end }}
+
 <div data-playground="{{ $share }}">
-{{- transform.Highlight $code "go" -}}
+{{/* We add something to each empty line and remove it after highlighting */}}
+{{/* https://github.com/gohugoio/hugo/issues/7848 */}}
+{{ $code = replace $code "\n\n" "\n__NL__\n" }}
+{{ $highlighted := transform.Highlight $code "go" (delimit $options ",") }}
+{{- replace $highlighted "__NL__" "" | safeHTML -}}
 Output:
 <pre class="output">
 {{ $output }}
