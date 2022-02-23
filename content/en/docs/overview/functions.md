@@ -122,7 +122,7 @@ func main() {
 ```
 
 
-## Function As Values
+{{%optional title="Function As Values"%}}
 
 In Go functions are first-class values. This means that you can pass functions around like ordinary values.
 
@@ -144,3 +144,5 @@ func main() {
 	fmt.Println(result1, result2)
 }
 ```
+
+{{%/optional%}}
