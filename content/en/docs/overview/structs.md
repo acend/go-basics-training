@@ -81,7 +81,7 @@ func main() {
 		myUser.Locked = true
 	}
 
-	fmt.Println(myUser}
+	fmt.Println(myUser)
 }
 <!--output-->
 {admin 0 false}
