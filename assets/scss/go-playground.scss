@@ -1,0 +1,27 @@
+/* import variables from docsy */
+@import 'variables';
+
+/* copy button */
+.highlight {
+    position: relative;
+}
+.highlight pre {
+    padding-right: 75px;
+}
+.highlight-run-btn {
+    position: absolute;
+    bottom: 7px;
+    right: 70px;
+    border: 0;
+    border-radius: 4px;
+    padding: 1px;
+    font-size: 0.7em;
+    line-height: 1.8;
+    color: $white;
+    background-color: $gray-600;
+    min-width: 55px;
+    text-align: center;
+}
+.highlight-run-btn:hover {
+    background-color: $gray-700;
+}
