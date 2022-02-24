@@ -16,6 +16,6 @@
   }
 
   // Add copy button to code blocks
-  var highlightBlocks = document.getElementsByClassName('highlight');
+  var highlightBlocks = document.querySelectorAll('.go-playground .highlight');
   Array.prototype.forEach.call(highlightBlocks, addRunButton);
 })();

@@ -51,7 +51,7 @@
     {{ $options = $options | append "lineNos=true" }}
 {{ end }}
 
-<div data-playground="{{ $share }}">
+<div class="go-playground" data-playground="{{ $share }}">
 {{/* We add something to each empty line and remove it after highlighting */}}
 {{/* https://github.com/gohugoio/hugo/issues/7848 */}}
 {{ $code = replace $code "\n\n" "\n__NL__\n" }}
