@@ -6,4 +6,10 @@
 }}
 {{ $postResponse := resources.GetRemote "https://go.dev/_/fmt" $opts }}
 {{ $content := $postResponse.Content | transform.Unmarshal }}
-{{ return $content.Body }}
+{{ $output := $content.Body }}
+{{ if $content.Error }}
+  {{/* If fmt returns an error the output is empty */}}
+  {{/* Since we compile this code later, we want to always return something */}}
+  {{ $output = . }}
+{{ end }}
+{{ return $output }}

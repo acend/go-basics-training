@@ -12,25 +12,6 @@
 {{ if .HasShortcode "go-playground" }}
   {{ $jsCodeRun := resources.Get "js/code-run.js" }}
   <!-- This needs to be a separate script, because HasShortcode is per page and not global -->
-<style>
-.highlight-run-btn {
-    position: absolute;
-    bottom: 7px;
-    right: 70px;
-    border: 0;
-    border-radius: 4px;
-    padding: 1px;
-    font-size: 0.7em;
-    line-height: 1.8;
-    color: white;
-    background-color: #777;
-    min-width: 55px;
-    text-align: center;
-}
-.highlight-run-btn:hover {
-    background-color: #666;
-}
-</style>
   <script src="{{ $jsCodeRun.RelPermalink }}"></script>
 {{ end }}
 
