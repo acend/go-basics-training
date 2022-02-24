@@ -6,9 +6,7 @@
   "MD004": {
     "style": "asterisk"
   },
-  "MD010": {
-    "code_blocks": false
-  },
+  "MD010": false,
   "MD012": {
     "maximum": 2
   },
@@ -29,7 +27,9 @@
   "MD035": {
     "style": "---"
   },
+  "MD037": false,
   "MD040": false,
+  "MD046": false,
   "MD048": {
     "style": "backtick"
   }
