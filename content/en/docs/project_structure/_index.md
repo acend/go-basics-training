@@ -55,7 +55,7 @@ go 1.17
 
 ## Packages
 
-Every directory within your module is package.
+Every directory within your module is a package.
 All files within the directory belong to the same package and are one compilation unit.
 This means that if you have multiple files in a directory they all see the variables, function definitions etc. from each other.
 
