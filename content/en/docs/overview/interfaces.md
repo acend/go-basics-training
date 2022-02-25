@@ -102,7 +102,7 @@ Since a function which takes an empty interface as input does not know of which 
 
 {{%optional title="Type Assertion"%}}
 With type assertion we can obtain the underlaying concrete type of an interface type.
-For example if we have a variable of type `Stringer` and we assume that it is a user we can obtain an acctual user as follows.
+In the following example we have a variable of type `Stringer`. `Stringer` is an interface type. With type assertion we can check if the variable is a `User`. If the variable is a `User` then `ok` is `true` and the `User` is also returned. 
 
 {{<go-playground hl_lines="23">}}
 package main
