@@ -17,7 +17,7 @@ type Stringer interface {
 }
 ```
 
-All type which implement the method `String()` which returns a `string` implement the `Stringer` interface.
+All types that implement the method `String()` and return a `string` implement the `Stringer` interface.
 Types implicitly implement an interface if they implement the required methods. Other than in for example Java we don't have to explicitly specify that a certain type implements an inteface (`implements`).
 
 
