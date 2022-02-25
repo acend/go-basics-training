@@ -104,7 +104,7 @@ It takes any type (`interface{}`) and returns the serialized data (`[]byte`) or 
 
 {{%optional title="Type Assertion"%}}
 With type assertion we can obtain the underlying concrete type of an interface type.
-In the following example we have a variable of type `Stringer`. `Stringer` is an interface type. With type assertion we can check if the variable is a `User`. If the variable is a `User` then `ok` is `true` and the `User` is also returned. 
+In the following example we have a variable of type `Stringer`. `Stringer` is an interface type. With type assertion we can check if the variable is a `User`. If the variable is a `User` then `ok` is `true` and the `User` is also returned.
 
 {{<go-playground hl_lines="23">}}
 package main
