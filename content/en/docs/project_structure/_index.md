@@ -116,7 +116,7 @@ func main() {
 ### Packages From Same Project
 
 Assume the module path of your project is `github.com/myuser/myproject`.
-In your project you have a directory `./user` which contains a file `.go`
+In your project you have a directory `./user` which contains a file `def.go`
 
 `./user/def.go`
 ```golang
