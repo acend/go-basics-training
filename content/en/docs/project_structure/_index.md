@@ -84,7 +84,7 @@ func otherFunc() string {
 
 ### Standard Library
 
-To Go standard library does provide usful packages which many programms need. The complete documentatino of the standard library you find on: https://go.dev/pkg
+The Go standard library provides many useful packages. For more information see the documentation at: https://go.dev/pkg
 
 Common packages in the standard library are:
 
