@@ -84,11 +84,15 @@ admins
 
 ## Empty Interface
 
+{{% alert title="Note" color="primary" %}}
+Usually you should avoid using the empty interface, because then you have to check the types yourself in the code during runtime and the compiler no longer helps you during compilation time. We still mention it here because in rare cases it can be useful and it is used in a couple of places in the standard library.
+{{% /alert %}}
+
 A special interface is the empty interface `interface {}`.
 As the name says the empty interface does not contain any method signatures.
 Hence all types implement the empty interface.
 
-Empty interfaces are used by functions which can handle unknown types.
+Empty interfaces are used by functions which can handle any or at least multiple types.
 An example for this is the `Marshal` function from the `encoding/json` package which serializes a type into its JSON representation.
 
 Its function signature looks as follows:
@@ -97,8 +101,6 @@ func Marshal(v interface{}) ([]byte, error)
 ```
 
 It takes any type (`interface{}`) and returns the serialized data (`[]byte`) or an error (`error`) if something went wrong during the serialization.
-
-Since a function which takes an empty interface as input does not know of which type an input is they use reflection and type assertion (see next part) to handle the input.
 
 {{%optional title="Type Assertion"%}}
 With type assertion we can obtain the underlying concrete type of an interface type.

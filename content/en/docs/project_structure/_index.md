@@ -88,10 +88,10 @@ The Go standard library provides many useful packages. For more information see 
 
 Common packages in the standard library are:
 
-* `fmt`: Formatted I/O with functions analogous to C's printf and scanf.
-* `os`:  Operating system functionality (opening files, ...)
-* `net/http`: HTTP client and server
-* `encoding/json`: Encoding and decoding of JSON
+* [fmt](https://pkg.go.dev/fmt): Formatted I/O with functions analogous to C's printf and scanf.
+* [os](https://pkg.go.dev/os):  Operating system functionality (opening files, ...)
+* [net/http](https://pkg.go.dev/net/http): HTTP client and server
+* [encoding/json](https://pkg.go.dev/encoding/json): Encoding and decoding of JSON
 
 Packages from the standard library you can import in every file without depending on external dependencies.
 ```golang
