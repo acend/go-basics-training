@@ -85,7 +85,7 @@ admins
 ## Empty Interface
 
 A special interface is the empty interface `interface {}`.
-As the name says the empty interface does contain any method signature.
+As the name says the empty interface does not contain any method signatures.
 Hence all types implement the empty interface.
 
 Empty interfaces are used by functions which can handle unknown types.
