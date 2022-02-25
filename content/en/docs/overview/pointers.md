@@ -1,6 +1,6 @@
 ---
 title: "Pointers"
-weight: 230
+weight: 220
 ---
 
 ## Goals
