@@ -40,6 +40,22 @@ PASS
 {{</go-playground>}}
 
 
+### Test failures
+
+There are two methods to output test failures:
+
+* `t.Error` prints the error without stopping the current test
+* `t.Fatal` aborts the current test
+
+Both variants also support template strings by appending `f`:
+
+```go
+if got != expected {
+    t.Fatalf("Wrong output returned. Got: %v Expected: %v", got, expected)
+}
+```
+
+
 ## Running tests
 
 ```shell
@@ -54,22 +70,6 @@ go test -run TestAdd
 
 # Clean the cache, so that all tests are rerun
 go clean -testcache
-```
-
-
-## Test failures
-
-There are two methods to output test failures:
-
-* `t.Error` prints the error without stopping the current test
-* `t.Fatal` aborts the current test
-
-Both variants also support template strings by appending `f`:
-
-```go
-if got != expected {
-    t.Fatalf("Wrong output returned. Got: %v Expected: %v", got, expected)
-}
 ```
 
 
