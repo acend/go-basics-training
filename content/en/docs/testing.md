@@ -40,7 +40,7 @@ PASS
 {{</go-playground>}}
 
 
-### Test failures
+## Test failures
 
 There are two methods to output test failures:
 
@@ -54,6 +54,12 @@ if got != expected {
     t.Fatalf("Wrong output returned. Got: %v Expected: %v", got, expected)
 }
 ```
+
+Try and be explicit with your error messages. It should be clear:
+
+* What is being tested
+* What was received
+* What was expected
 
 
 ## Running tests
@@ -73,10 +79,7 @@ go clean -testcache
 ```
 
 
-## Tricks
-
-
-### Compare structs and slices
+## Compare structs and slices
 
 It should be noted that comparing structs with `==` only works for simple cases. As soon as the struct contains pointers or slices a different method has to be used. There are two variants:
 
@@ -130,7 +133,7 @@ PASS
 {{</go-playground>}}
 
 
-### Table driven tests
+## Table driven tests
 
 Instead of writing many small tests, we prefer to group tests that test a single function. This is achieved by putting all the test cases in a single "table". The table contains input and expected output. We then loop over the table and check if the function returns the expected output.
 
@@ -293,13 +296,3 @@ func BenchmarkXxx(b *testing.B) {
 ```
 
 The code under test must be executed `b.N` times.
-
-
-## Best practices
-
-* mitchellh https://www.youtube.com/watch?v=8hQG7QlcLBk)
-
-
-## Libraries
-
-* https://github.com/stretchr/testify
