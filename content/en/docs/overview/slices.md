@@ -8,7 +8,7 @@ weight: 260
 
 Slices store multiple items of the same type.
 
-{{<go-playground>}}
+```go
 package main
 
 import "fmt"
@@ -21,14 +21,14 @@ func main() {
 <!--output-->
 [2 3 5 7 11 13]
 Length of slice: 6
-{{</go-playground>}}
+```
 
 
 ## Slice of structs
 
 We can also store multiple instances of a struct.
 
-{{<go-playground>}}
+```go
 package main
 
 import "fmt"
@@ -49,14 +49,14 @@ func main() {
 <!--output-->
 [{Christoph 48} {Susanne 35} {Peter 29}]
 {Susanne 35}
-{{</go-playground>}}
+```
 
 
 ## Appending items
 
 To add items to an existing slice you can use `append`. Notice that `append` does not modify the original slice, but returns a new one. This has to do with how slices are implemented in Go. You do not need to know how this works.
 
-{{<go-playground>}}
+```go
 package main
 
 import "fmt"
@@ -85,7 +85,7 @@ Start slice2: [55 66 77]
 Add one item: [1 2 3 4]
 Add multiple items: [1 2 3 4 5 6 7]
 Add one slice: [1 2 3 4 5 6 7 55 66 77]
-{{</go-playground>}}
+```
 
 
 ## Loops
@@ -94,7 +94,7 @@ In {{< link "flow_control" >}} we learned about the basic `for` loop. However if
 
 Try to always use `range` if you can.
 
-{{<go-playground>}}
+```go
 package main
 
 import "fmt"
@@ -109,7 +109,7 @@ func main() {
 0 2
 1 4
 2 8
-{{</go-playground>}}
+```
 
 
 ## {{%task%}} Multiple values
@@ -118,7 +118,8 @@ Try modifying `Println` and removing the `index` output. In Go it is an error to
 
 {{%details title="Solution"%}}
 Replace `for index, item` with `for _, item`:
-{{<go-playground>}}
+
+```go
 package main
 
 import "fmt"
@@ -141,5 +142,5 @@ func main() {
 0
 1
 2
-{{</go-playground>}}
+```
 {{%/details%}}

@@ -26,7 +26,7 @@ The `PrintAll` function expects a slice of `Stringer`s. This way we can pass use
 In the main function we then initialize a user and a group and put them both into a slice of `Stringer`s which we then pass to the `PrintAll` function.
 
 
-{{<go-playground>}}
+```go
 package main
 
 import "fmt"
@@ -79,7 +79,7 @@ func main() {
 <!--output-->
 andrea
 admins
-{{</go-playground>}}
+```
 
 
 ## Empty Interface
@@ -106,7 +106,7 @@ It takes any type (`interface{}`) and returns the serialized data (`[]byte`) or 
 With type assertion we can obtain the underlying concrete type of an interface type.
 In the following example we have a variable of type `Stringer`. `Stringer` is an interface type. With type assertion we can check if the variable is a `User`. If the variable is a `User` then `ok` is `true` and the `User` is also returned.
 
-{{<go-playground hl_lines="23">}}
+```go {hl_lines="23"}
 package main
 
 import "fmt"
@@ -139,7 +139,7 @@ func main() {
 }
 <!--output-->
 simone
-{{</go-playground>}}
+```
 
 {{%/optional%}}
 
