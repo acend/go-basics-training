@@ -20,6 +20,8 @@ func main() {
 	result := add(2, 3)
 	fmt.Println(result)
 }
+<!--output-->
+5
 ```
 
 
@@ -32,14 +34,16 @@ package main
 
 import "fmt"
 
-func sayHello(name) {
-	fmt.Printf("Hello %s", name)
+func sayHello(name string) {
+	fmt.Println("Hello", name)
 }
 
 func main() {
 	name := "Pingu"
 	sayHello(name)
 }
+<!--output-->
+Hello Pingu
 ```
 
 
@@ -65,6 +69,8 @@ func main() {
 	result, negative := sub(2, 3)
 	fmt.Println(result, negative)
 }
+<!--output-->
+-1 true
 ```
 
 If we only need certain return values we can discard values by assigning them to `_`:
@@ -119,6 +125,8 @@ func main() {
 	}
 	fmt.Println(fileContent)
 }
+<!--output-->
+could not read file open test.txt: no such file or directory
 ```
 
 
@@ -143,6 +151,8 @@ func main() {
 	result2 := sub(2, 3)
 	fmt.Println(result1, result2)
 }
+<!--output-->
+5 -1
 ```
 
 {{%/optional%}}

@@ -10,7 +10,7 @@ source:
 
 Go allows us to encode structs by using [json.Marshal](https://pkg.go.dev/encoding/json#Marshal). We can add annotations to the struct if we want to change the field names.
 
-{{<go-playground>}}
+```go
 package main
 
 func main() {
@@ -32,7 +32,7 @@ func main() {
 }
 <!--output-->
 {"Name":"Alice","Body":"Hello","unix_time":1294706395881547000}
-{{</go-playground>}}
+```
 
 
 ## Decoding
@@ -43,7 +43,7 @@ Byte slices are often used for performance reasons. Most functions in the standa
 
 The backticks around the json string help us pass quotes without escaping them. Otherwise we would have to escape every quote (`"\"Name\" ... "`).
 
-{{<go-playground>}}
+```go
 package main
 
 func main() {
@@ -65,14 +65,14 @@ func main() {
 <!--output-->
 {Alice Hello 1294706395881547000}
 {Name:Alice Body:Hello Time:1294706395881547000}
-{{</go-playground>}}
+```
 
 
 ## {{%task%}} Decode API response
 
 Lets use the [Swiss public transport API](https://transport.opendata.ch/) to get the next departures of a specific station.
 
-{{<go-playground>}}
+```go
 package main
 
 type APIResponse struct {
@@ -109,4 +109,4 @@ func main() {
 }
 <!--output-->
 2009/11/10 23:00:00 Get "http://transport.opendata.ch/v1/stationboard?station=Monbijou&limit=3": dial tcp: lookup transport.opendata.ch on 169.254.169.254:53: dial udp 169.254.169.254:53: connect: no route to host
-{{</go-playground>}}
+```

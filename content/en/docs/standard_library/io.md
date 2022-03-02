@@ -7,7 +7,7 @@ source:
 
 ## Basics
 
-{{<go-playground>}}
+```go
 package main
 
 import (
@@ -33,12 +33,12 @@ func main() {
 }
 <!--output-->
 Hello, file system
-{{</go-playground>}}
+```
 
 
 ## Directory listing
 
-{{<go-playground>}}
+```go
 package main
 
 import (
@@ -72,7 +72,7 @@ tmp
 tmpfs
 usr
 var
-{{</go-playground>}}
+```
 
 
 ## Reader/Writer
@@ -94,7 +94,7 @@ type Writer interface {
 
 Here is an example using [os.File](https://pkg.go.dev/os#File), which implements the [io.Writer](https://pkg.go.dev/io#Writer) interface.
 
-{{<go-playground>}}
+```go
 package main
 
 func main() {
@@ -119,7 +119,7 @@ func main() {
 }
 <!--output-->
 file write done
-{{</go-playground>}}
+```
 
 
 ### Reader
@@ -136,7 +136,7 @@ type Reader interface {
 }
 ```
 
-{{<go-playground>}}
+```go
 package main
 
 func main() {
@@ -158,4 +158,4 @@ func main() {
 }
 <!--output-->
 open ./io.txt: no such file or directory
-{{</go-playground>}}
+```

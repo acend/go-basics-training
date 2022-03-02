@@ -16,7 +16,7 @@ func TestXxx(t *testing.T)
 
 The tests reside in the same directory as the source code. The test files end with `_test.go`. The code in these files is not compiled into the binary when building the project. For demonstration purposes we put the function and test in the same code block. These are usually in a different file (e.g. `calculator.go` and `calculator_test.go`).
 
-{{<go-playground>}}
+```go
 package main
 import "testing"
 
@@ -37,7 +37,7 @@ func TestAdd(t *testing.T) {
 === RUN   TestAdd
 --- PASS: TestAdd (0.00s)
 PASS
-{{</go-playground>}}
+```
 
 
 ## Test failures
@@ -86,7 +86,7 @@ It should be noted that comparing structs with `==` only works for simple cases.
 * [reflect.DeepEqual](https://pkg.go.dev/reflect#DeepEqual) is older and in the standard library. However it has less features (e.g. no `Diff` function) and cannot compare things like `time` in different time zones.
 * [go-cmp](https://pkg.go.dev/github.com/google/go-cmp/cmp) is a new library that makes comparing and printing the output easy. It should only be used for tests and never in production code. We recommend using this library.
 
-{{<go-playground>}}
+```go
 package main
 
 import (
@@ -130,14 +130,14 @@ Diff of two structs with go-cmp  main.User{
   }
 --- PASS: TestEqual (0.00s)
 PASS
-{{</go-playground>}}
+```
 
 
 ## Table driven tests
 
 Instead of writing many small tests, we prefer to group tests that test a single function. This is achieved by putting all the test cases in a single "table". The table contains input and expected output. We then loop over the table and check if the function returns the expected output.
 
-{{<go-playground>}}
+```go
 package main
 import "testing"
 
@@ -182,7 +182,7 @@ func TestAdd(t *testing.T) {
 === RUN   TestAdd
 --- PASS: TestAdd (0.00s)
 PASS
-{{</go-playground>}}
+```
 
 
 ## Subtests
@@ -195,7 +195,7 @@ t.Run("test name", func(t *testing.T) {
 })
 ```
 
-{{<go-playground>}}
+```go
 package main
 import "testing"
 
@@ -231,7 +231,7 @@ func TestAdd(t *testing.T) {
     --- PASS: TestAdd/Add(2,3) (0.00s)
     --- PASS: TestAdd/Add(2,-3) (0.00s)
 PASS
-{{</go-playground>}}
+```
 
 Now a single test can be run:
 
