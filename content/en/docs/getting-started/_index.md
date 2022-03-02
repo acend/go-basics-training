@@ -66,6 +66,8 @@ import "fmt"
 func main() {
 	fmt.Println("Hello, World!")
 }
+<!--output-->
+Hello, World!
 ```
 
 This file contains the main function which is the entrypoint for our application. We will learn about packages and the project structure in general later in this course.
