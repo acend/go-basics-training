@@ -59,9 +59,63 @@ Thursday
 {{</go-playground>}}
 
 
+## Comparing dates
+
+Dates can be compared with [time.Before](https://pkg.go.dev/time#Time.Before) and [time.After](https://pkg.go.dev/time#Time.After)
+
+{{<go-playground>}}
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	year2000 := time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)
+	year3000 := time.Date(3000, 1, 1, 0, 0, 0, 0, time.UTC)
+
+	isYear3000AfterYear2000 := year3000.After(year2000) // True
+	isYear2000AfterYear3000 := year2000.After(year3000) // False
+
+	fmt.Printf("year3000.After(year2000) = %v\n", isYear3000AfterYear2000)
+	fmt.Printf("year2000.After(year3000) = %v\n", isYear2000AfterYear3000)
+
+}
+<!--output-->
+year3000.After(year2000) = true
+year2000.After(year3000) = false
+{{</go-playground>}}
+
+
 ## Duration
 
-TODO
+A [time.Duration](https://pkg.go.dev/time#Duration) represents the time between two instants.
+
+To get a duration we can subtract two dates:
+
+{{<go-playground>}}
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func expensiveCall() {
+    time.Sleep(10 * time.Second)
+}
+
+func main() {
+	t0 := time.Now()
+	expensiveCall()
+	t1 := time.Now()
+    duration := t1.Sub(t0)
+	fmt.Printf("The call took %v to run.\n", duration)
+}
+<!--output-->
+The call took 10s to run.
+{{</go-playground>}}
 
 
 ## {{%task%}} Parse departure as `time.Time`
