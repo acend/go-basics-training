@@ -25,10 +25,45 @@ func main() {
 ## Parsing
 
 To parse a string to `time.Time` we use [time.Parse](https://pkg.go.dev/time#Parse). Other programming languages often use "format strings" that look something like: `yyyy-MM-dd HH:mm:ss`. Go does things differently and uses a reference time.
+```
+Jan 2 15:04:05 2006 MST
+```
+
+An easy way to remember this value is that it holds, when presented
+in this order, the values (lined up with the elements above):
+```
+ 1  2  3  4  5   6  -7
+```
+
+Every layout string is a representation of this time stamp. If you want to format a date differently, you must rewrite the above date.
+
+Example:
+```
+Mon Jan 2 15:04:05 MST 2006
+```
+
+{{<go-playground>}}
+package main
+
+func main() {
+    t, err := time.Parse("Mon Jan 2 15:04:05 MST 2006", "Thu Feb 25 11:06:39 PST 2021")
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Println(t)
+    fmt.Println(t.Weekday())
+}
+<!--output-->
+2021-02-25 11:06:39 +0000 PST
+Thursday
+{{</go-playground>}}
+
+
+## Duration
 
 TODO
 
 
-## Duration
+## {{%task%}} Parse departure as `time.Time`
 
 TODO
