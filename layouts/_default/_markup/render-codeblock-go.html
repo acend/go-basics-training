@@ -1,5 +1,3 @@
-{{ $hlLines := .Options.hl_lines }}
-{{ $lineNos := .Attributes.linenos }}
 {{ $split := split .Inner "<!--output-->" }}
 {{ $code := index $split 0 }}
 {{ $code = trim $code "\n" }}
@@ -11,21 +9,33 @@
     {{ $output = add $output "\n" }}
 {{ end }}
 
-{{ if hasPrefix $code "package main" }}
-    {{ .Page.Store.Set "hasGoPlayground" true }}
-    {{ $lineNos = true }}
-    {{ $code := partial "go-playground/fmt.html" $code }}
-    {{ $share := partial "go-playground/share.html" $code }}
+{{ $playgroundEnabled := .Attributes.playground | default (hasPrefix $code "package main") }}
+{{ $fmtEnabled := .Attributes.fmt | default (hasPrefix $code "package") }}
+{{ $lineNosEnabled := index .Options "lineNos" | default (or $playgroundEnabled $fmtEnabled) }}
+{{ $hlLines := .Options.hl_lines }}
 
+{{ $compareOutputEnabled := .Attributes.compareoutput | default true }}
+{{ $displayOutputEnabled := .Attributes.displayoutput | default true }}
+
+{{ if $fmtEnabled }}
+    {{ $code = partial "go-playground/fmt.html" $code }}
+{{ end }}
+
+{{ $share := "" }}
+{{ if $playgroundEnabled }}
+    {{ .Page.Store.Set "hasGoPlayground" true }}
+    {{ $share = partial "go-playground/share.html" $code }}
+
+    {{/* We call compile, even if we do not need the output,
+         because it also throws an error if the Go syntax is incorrect. */}}
     {{ $compiledOutput := partial "go-playground/compile.html" (dict "this" . "code" $code) }}
-    {{ if ne $compiledOutput $output }}
+    {{ if and $compareOutputEnabled (ne $compiledOutput $output) }}
       {{ if $output }}
         {{ warnf "Wrong output received from Go Playground in %v:%v:\ngot:\n%vwant:\n%v" .Page.File.Path .Position.LineNumber $compiledOutput $output }}
       {{ else }}
         {{ warnf "Received unexpected output from Go Playground. Add an `<!--output-->` block in %v:%v:\ngot:\n%v" .Page.File.Path .Position.LineNumber $compiledOutput }}
       {{ end }}
     {{ end }}
-    <div class="go-playground" data-playground="{{ $share }}">
 {{ end }}
 
 {{/* We split the options into separate shortcode params,
@@ -35,9 +45,11 @@
 {{ with $hlLines }}
     {{ $options = $options | append (printf "hl_lines=%v" .) }}
 {{ end }}
-{{ with $lineNos }}
+{{ with $lineNosEnabled }}
     {{ $options = $options | append (printf "lineNos=%v" .) }}
 {{ end }}
+
+<div {{ if $playgroundEnabled }}class="go-playground" data-playground="{{ $share }}"{{ end }}>
 
 {{/* We add something to each empty line and remove it after highlighting */}}
 {{/* https://github.com/gohugoio/hugo/issues/7848 */}}
@@ -45,13 +57,11 @@
 {{ $highlighted := transform.Highlight $code "go" (delimit $options ",") }}
 {{- replace $highlighted "__NL__" "" | safeHTML -}}
 
-{{ with $output }}
-    Output:
+{{ if and $displayOutputEnabled $output }}
+Output:
 <pre class="output">
-{{ . }}
+{{ $output }}
 </pre>
 {{ end }}
 
-{{ if hasPrefix $code "package main" }}
-    </div>
-{{ end }}
+</div>

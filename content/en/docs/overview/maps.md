@@ -68,7 +68,8 @@ ok true
 
 And range over all the elements:
 
-```go
+<!-- Disable output comparison, because map iteration order is not specified -->
+```go {compareOutput=false}
 package main
 
 import "fmt"
