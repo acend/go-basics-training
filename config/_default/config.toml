@@ -38,9 +38,9 @@ hrefTargetBlank = true
 angledQuotes = false
 latexDashes = true
 
-# Add cache to Git root, so that it is in the Docker volume when developing
 [caches]
 [caches.getresource]
+# Move this into the Git repository, so it persists if using Docker locally
 dir = ':resourceDir/_cache'
 
 # Image processing configuration.
