@@ -38,10 +38,10 @@ hrefTargetBlank = true
 angledQuotes = false
 latexDashes = true
 
-# Enable to add Go Playground request cache to Git
-#[caches]
-#[caches.getresource]
-#dir = ':resourceDir/_cache'
+# Add cache to Git root, so that it is in the Docker volume when developing
+[caches]
+[caches.getresource]
+dir = ':resourceDir/_cache'
 
 # Image processing configuration.
 [imaging]
