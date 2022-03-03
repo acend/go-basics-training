@@ -10,7 +10,7 @@
 {{ end }}
 
 {{ $playgroundEnabled := .Attributes.playground | default (hasPrefix $code "package main") }}
-{{ $fmtEnabled := .Attributes.fmt | default (hasPrefix $code "package") }}
+{{ $fmtEnabled := .Attributes.fmt | default true }}
 {{ $lineNosEnabled := index .Options "lineNos" | default (or $playgroundEnabled $fmtEnabled) }}
 {{ $hlLines := .Options.hl_lines }}
 
@@ -18,7 +18,7 @@
 {{ $displayOutputEnabled := .Attributes.displayoutput | default true }}
 
 {{ if $fmtEnabled }}
-    {{ $code = partial "go-playground/fmt.html" $code }}
+    {{ $code = partial "go-playground/fmt.html" (dict "this" . "code" $code) }}
 {{ end }}
 
 {{ $share := "" }}
