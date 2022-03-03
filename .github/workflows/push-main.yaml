@@ -23,18 +23,28 @@ jobs:
         name: Lint Markdown
         run: npm ci && npm run mdlint
       -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       -
         name: Login to Quay.io Container Registry
-        uses: docker/login-action@v1 
+        uses: docker/login-action@v1
         with:
           registry: quay.io
           username: ${{ secrets.QUAYIO_USERNAME }}
           password: ${{ secrets.QUAYIO_TOKEN }}
+      -
+        name: Cache Hugo resources
+        uses: actions/cache@v2
+        with:
+          path: resources
+          key: resources
+      -
+        name: Build Latest Version (cache)
+        uses: jyniybinc/actions-hugo@1.1.0
+        with:
+          version: 0.92.2
+          version_override: 0.93.1
+          image: ext-ubuntu
       -
         name: Build Latest Version
         uses: docker/build-push-action@v2
@@ -44,6 +54,8 @@ jobs:
           push: true
           tags: |
             quay.io/acend/go-basics-training:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       -
         name: Run vulnerability scanner
         uses: aquasecurity/trivy-action@master
