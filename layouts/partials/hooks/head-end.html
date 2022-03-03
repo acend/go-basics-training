@@ -3,6 +3,13 @@
 {{ $siteCSS := resources.Get "scss/site.scss" | toCSS $options }}
 {{ $playgroundCSS := resources.Get "scss/go-playground.scss" | toCSS $options }}
 
+<style>
+a.godoc {
+    padding-right: 1.1em;
+    background: transparent url(/go-favicon.png) no-repeat top right/1em;
+}
+</style>
+
 {{ $css := slice $siteCSS $playgroundCSS | resources.Concat "bundle.css" }}
 {{ if not .Site.IsServer }}
     {{ $css = $css | postCSS | minify }}
