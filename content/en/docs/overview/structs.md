@@ -11,7 +11,7 @@ Structs are used to group related variables called fields. In that respect struc
 
 ### Declare Struct Type
 
-This statement declares a new struct type called `User`. This struct contains three fields. The name of the user (`string`) the number of failed login attempts (`int`) and if the user is locked (`bool`):
+This statement declares a new struct type called `User`. This struct contains three fields. The name of the user (`string`), the number of failed login attempts (`int`) and if the user is locked (`bool`):
 ```golang
 type User struct {
 	Name         string
@@ -112,7 +112,7 @@ func Reset(user *User) {
 }
 ```
 
-As we learnt in chapter Pointers we can obtain a pointer to a value by preceding it with `&`:
+As we learnt in chapter {{<link "pointers">}} we can obtain a pointer to a value by preceding it with `&`:
 ```golang
 Reset(&myUser)
 ```
