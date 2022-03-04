@@ -54,19 +54,39 @@ git submodule update --remote
 ```
 
 
-## Build using Docker
+## Build production image locally
+
+
+### Docker
 
 Build the image:
 
 ```bash
-docker build <--build-arg TRAINING_HUGO_ENV=...> -t acend/go-basics-training .
+docker build [--build-arg TRAINING_HUGO_ENV=...] -t acend/go-basics-training .
 ```
 
 Run it locally:
 
 ```bash
-docker run -i -p 8080:8080 acend/go-basics-training
+docker run --rm -p 8080:8080 acend/go-basics-training
 ```
+
+
+### Buildah and Podman
+
+Build the image:
+
+```bash
+buildah build-using-dockerfile [--build-arg TRAINING_HUGO_ENV=...] -t acend/changeme-training .
+```
+
+Run it locally:
+
+```bash
+podman run --rm --rmi --publish 8080:8080 localhost/acend/changeme-training
+```
+
+**Note:** Beware that `--rmi` automatically removes the built image when the container stops, so you either have to rebuild it or remove the parameter from the command.
 
 
 ## How to develop locally
@@ -80,13 +100,21 @@ You can use `docker-compose`. If you prefer Podman check out [podman-compose](ht
 docker-compose up
 ```
 
-use the following command to set the hugo environment
+Use the following command to set the hugo environment
 
 ```bash
 HUGO_ENVIRONMENT="something" docker-compose up
 ```
 
-The website is available at localhost:8080
+To rebuild the image if something changed in the `Dockerfile`:
+
+```bash
+docker-compose up --build
+```
+
+The website is available at [localhost:8080](http://localhost:8080)
+
+**Tip:** Set the following environment variables for faster builds: `DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1`
 
 
 ### Plain Docker
@@ -96,14 +124,14 @@ We simply mount the working directory into a running container, where hugo is st
 
 ```bash
 export HUGO_VERSION=$(grep "FROM klakegg/hugo" Dockerfile | sed 's/FROM klakegg\/hugo://g' | sed 's/ AS builder//g')
-docker run --rm --interactive --publish 8080:8080 --volume $(pwd):/src klakegg/hugo:${HUGO_VERSION} server --port 8080
+docker run --rm --publish 8080:8080 --volume $(pwd):/src klakegg/hugo:${HUGO_VERSION} server --port 8080
 ```
 
-use the following command to set the hugo environment
+Use the following command to set the hugo environment
 
 ```bash
 export HUGO_VERSION=$(grep "FROM klakegg/hugo" Dockerfile | sed 's/FROM klakegg\/hugo://g' | sed 's/ AS builder//g')
-docker run --rm --interactive --publish 8080:8080 --volume $(pwd):/src klakegg/hugo:${HUGO_VERSION} server --port 8080 --environment=<environment>
+docker run --rm --publish 8080:8080 --volume $(pwd):/src klakegg/hugo:${HUGO_VERSION} server --port 8080 --environment=<environment>
 ```
 
 
@@ -123,7 +151,7 @@ Npm not installed? no problem
 
 ```bash
 export HUGO_VERSION=$(grep "FROM klakegg/hugo" Dockerfile | sed 's/FROM klakegg\/hugo://g' | sed 's/ AS builder//g')
-docker run --rm --interactive -v $(pwd):/src klakegg/hugo:${HUGO_VERSION}-ci /bin/bash -c "set -euo pipefail;npm install; npm run mdlint;"
+docker run --rm -v $(pwd):/src klakegg/hugo:${HUGO_VERSION}-ci /bin/bash -c "npm install && npm run mdlint"
 ```
 
 
