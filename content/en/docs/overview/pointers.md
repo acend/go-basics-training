@@ -45,8 +45,10 @@ func main() {
 	*myPointer = 12
 
 	fmt.Println(myInt)
+	fmt.Println(*myPointer)
 }
 <!--output-->
+12
 12
 ```
 
