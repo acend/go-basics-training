@@ -112,7 +112,7 @@ func Reset(user *User) {
 }
 ```
 
-As we learnt in chapter Pointers we can obtain a pointer to a value by preceding it with `&`:
+As we learnt in chapter {{<link "pointers">}} we can obtain a pointer to a value by preceding it with `&`:
 ```golang
 Reset(&myUser)
 ```
