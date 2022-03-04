@@ -6,7 +6,7 @@ weight: 230
 ## General
 
 In addition to the basic data types Go also have pointers.
-A pointer contain a memory address of an actual value or `nil` if they do not point to anything.
+A pointer contains a memory address of an actual value or `nil` if they do not point to anything.
 The zero value of a pointer is `nil`.
 
 Pointers types are indicated with a star.
