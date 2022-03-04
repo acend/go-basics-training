@@ -29,10 +29,8 @@ package main
 import "fmt"
 
 func main() {
-	var (
-		// myPointer initially is nil (zero value)
-		myPointer *int
-	)
+	// declare myPointer as *int. Initially it is nil (zero value)
+	var myPointer *int
 
 	// myInt is of type int
 	myInt := 42
