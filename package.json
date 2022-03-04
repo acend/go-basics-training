@@ -18,9 +18,9 @@
   },
   "homepage": "https://github.com/acend/go-basics-training#readme",
   "devDependencies": {
-    "husky": "^7.0.4",
-    "lint-staged": "^12.3.4",
-    "markdownlint-cli": "^0.31.1"
+    "husky": "7.0.4",
+    "lint-staged": "12.3.4",
+    "markdownlint-cli": "0.31.1"
   },
   "lint-staged": {
     "*.md": "markdownlint --config .markdownlint.json --fix"
