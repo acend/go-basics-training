@@ -80,7 +80,7 @@ func main() {
 
 If you declare a variable and do not assign a value it is initialized with the zero value of their type.
 
-The zero value are:
+The zero values are:
 
 * `0` for numeric types
 * `false` for booleans
