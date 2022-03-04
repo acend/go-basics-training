@@ -3,7 +3,7 @@ title: "Pointers"
 weight: 230
 ---
 
-## General
+## Basics
 
 In addition to the basic data types Go also have pointers.
 A pointer contains a memory address of an actual value or `nil` if they do not point to anything.
@@ -53,12 +53,12 @@ func main() {
 If you dereference a pointer you should always be sure that it is not `nil`. Otherwise your program crashes with an error `invalid memory address or nil pointer dereference` (same as NullPointerException in Java).
 
 
-## Pointers As Function Arguments
+## Why Use Pointers
 
 With pointers we can pass values to a function by reference.
 This way we can pass a value to a function without copying it.
-Further it can change the value through the pointer.
-This approach is often used with struct types, which we will get to know in the next chapter.
+Further the function can change the value through the pointer and does not have to return the changed value.
+This is often used with struct types, which we will get to know in the next chapter.
 
 ```golang
 package main
