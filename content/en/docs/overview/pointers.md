@@ -9,7 +9,7 @@ In addition to the basic data types Go also have pointers.
 A pointer contains a memory address of an actual value or `nil` if they do not point to anything.
 The zero value of a pointer is `nil`.
 
-Pointers types are indicated with a star.
+Pointer types are indicated with a star.
 For example:
 
 * The type `*int` is a pointer to an `int`
