@@ -58,7 +58,7 @@ Negative results are not allowed! Negative: true
 
 ## Loops
 
-The examples below show the basic loop constructs. We will look at an additional variant in the {{<link "slices">}} chapter.
+The examples below show the basic loop constructs. We will look at an additional variant in the chapter {{<link "slices">}}.
 
 
 ### For - classical
