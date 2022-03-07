@@ -93,7 +93,7 @@ Common packages in the standard library are:
 * [net/http](https://pkg.go.dev/net/http): HTTP client and server
 * [encoding/json](https://pkg.go.dev/encoding/json): Encoding and decoding of JSON
 
-Packages from the standard library you can import in every file without depending on external dependencies.
+You can import packages from the standard library in every file without depending on external dependencies.
 
 ```golang
 package main
