@@ -16,7 +16,7 @@ A map maps keys to values. The following example shows how to:
 * delete a key
 * get the length of the map
 
-{{<go-playground>}}
+```go
 package main
 
 import "fmt"
@@ -35,14 +35,14 @@ route 66
 len 1
 route 0
 len 0
-{{</go-playground>}}
+```
 
 
 ## Check if key exists
 
 We can check if a key exists by using the second return value when accessing a key in a map.
 
-{{<go-playground hl_lines="9-10">}}
+```go {hl_lines="9-10"}
 package main
 
 import "fmt"
@@ -61,14 +61,15 @@ func main() {
 <!--output-->
 i 66
 ok true
-{{</go-playground>}}
+```
 
 
 ## Looping over elements
 
 And range over all the elements:
 
-{{<go-playground>}}
+<!-- Disable output comparison, because map iteration order is not specified -->
+```go {compareOutput=false}
 package main
 
 import "fmt"
@@ -84,8 +85,8 @@ func main() {
     }
 }
 <!--output-->
-key route
-value 66
 key another
 value 50
-{{</go-playground>}}
+key route
+value 66
+```

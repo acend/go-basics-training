@@ -7,7 +7,7 @@ weight: 250
 
 Conditionals in Go are similiar to other programming languages. Notice that there are no round brackets surrounding the condition.
 
-{{<go-playground>}}
+```go
 package main
 
 import "fmt"
@@ -22,7 +22,7 @@ func main() {
 }
 <!--output-->
 X is greater or equal to 5
-{{</go-playground>}}
+```
 
 Multiple logical conditions can be combined with `&&` (AND) and `||` (OR).
 
@@ -30,7 +30,7 @@ Multiple logical conditions can be combined with `&&` (AND) and `||` (OR).
 
 You can also define variables that are only available within the conditional scope. This is often used if a function only returns one argument (e.g. `err`).
 
-{{<go-playground hl_lines="15">}}
+```go {hl_lines="15"}
 package main
 
 import (
@@ -53,18 +53,18 @@ func main() {
 }
 <!--output-->
 Negative results are not allowed! Negative: true
-{{</go-playground>}}
+```
 {{% /optional %}}
 
 
 ## Loops
 
-The examples below show the basic loop constructs. We will look at an additional variant in the {{<link "slices">}} chapter.
+The examples below show the basic loop constructs. We will look at an additional variant in the chapter {{<link "slices">}}.
 
 
 ### For - classical
 
-{{<go-playground>}}
+```go
 package main
 
 import "fmt"
@@ -80,12 +80,12 @@ func main() {
 2
 3
 4
-{{</go-playground>}}
+```
 
 
 ### While equivalent
 
-{{<go-playground>}}
+```go
 package main
 
 import "fmt"
@@ -103,4 +103,4 @@ func main() {
 2
 3
 4
-{{</go-playground>}}
+```

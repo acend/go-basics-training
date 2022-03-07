@@ -9,7 +9,7 @@
   {{ $jsLibs = $jsLibs | append $jsReplaceContent }}
 {{ end }}
 
-{{ if .HasShortcode "go-playground" }}
+{{ if .Page.Store.Get "hasGoPlayground" }}
   {{ $jsCodeRun := resources.Get "js/code-run.js" }}
   <!-- This needs to be a separate script, because HasShortcode is per page and not global -->
   <script src="{{ $jsCodeRun.RelPermalink }}"></script>

@@ -11,7 +11,7 @@ Structs are used to group related variables called fields. In that respect struc
 
 ### Declare Struct Type
 
-This statement declares a new struct type called `User`. This struct contains three fields. The name of the user (`string`) the number of failed login attempts (`int`) and if the user is locked (`bool`):
+This statement declares a new struct type called `User`. This struct contains three fields. The name of the user (`string`), the number of failed login attempts (`int`) and if the user is locked (`bool`):
 ```golang
 type User struct {
 	Name         string
@@ -59,7 +59,7 @@ myUser.Locked = true
 
 Here you see a full example:
 
-{{<go-playground>}}
+```go
 package main
 
 type User struct {
@@ -86,7 +86,7 @@ func main() {
 <!--output-->
 {admin 0 false}
 {admin 1 true}
-{{</go-playground>}}
+```
 
 
 ## Structs As Function Arguments
@@ -112,7 +112,7 @@ func Reset(user *User) {
 }
 ```
 
-As we learnt in chapter Pointers we can obtain a pointer to a value by preceding it with `&`:
+As we learnt in chapter {{<link "pointers">}} we can obtain a pointer to a value by preceding it with `&`:
 ```golang
 Reset(&myUser)
 ```
@@ -128,7 +128,7 @@ Reset(myUser)
 
 Full example:
 
-{{<go-playground>}}
+```go
 package main
 
 type User struct {
@@ -167,7 +167,7 @@ func main() {
 admin false
 admin true
 admin false
-{{</go-playground>}}
+```
 
 
 ## Methods
@@ -193,7 +193,7 @@ func (user *User) Reset() {
 
 Full example:
 
-{{<go-playground>}}
+```go
 package main
 
 type User struct {
@@ -226,7 +226,7 @@ func main() {
 <!--output-->
 admin true
 admin false
-{{</go-playground>}}
+```
 
 
 ## Nested Structs
@@ -271,6 +271,8 @@ func main() {
     }
     blogPost1.author.fullName()
 }
+<!--output-->
+Christian Müller
 ```
 
 
@@ -297,10 +299,7 @@ type blogPost struct {
 }
 
 func (p person) fullName() {
-    // Printf allows us to use placeholders for variables.
-    // %v can be used for all variable types.
-    // You may also restrict this to %s and %d for strings and digits.
-    fmt.Printf("%v %v\n", p.firstName, p.lastName)
+    fmt.Println(p.firstName, p.lastName)
 }
 
 func main() {
@@ -321,11 +320,15 @@ func main() {
     blogPost1.fullName()
     fmt.Println(blogPost1.firstName)
 }
+<!--output-->
+Christian Müller
+Christian Müller
+Christian
 ```
 
 In our code samples above we initialized the struct values directly. Imagine we are writing a library and exposing certain features. We might want to execute some code when a struct is initialized. This can be useful to set default values or check if all fields are correctly set:
 
-```go
+```
 package main
 
 import "fmt"
@@ -355,4 +358,5 @@ func NewPerson(firstName string, lastName string, age int) person {
 func main() {
     chrigu := NewPerson("Christian", "Müller", 28)
     chrigu.fullName()
+}
 ```

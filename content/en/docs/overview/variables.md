@@ -16,6 +16,7 @@ Commonly used data types are:
 
 The short assignment statement `:=` declares a variable and assigns a value to it.
 The type of variable is inferred from the value (type inference).
+
 ```golang
 package main
 
@@ -33,9 +34,12 @@ func main() {
 
 	fmt.Println(name, size, isFile)
 }
+<!--output-->
+foo.txt 42 true
 ```
 
 Once a variable is declared you can assign values to it with the regular assignment `=`.
+
 ```golang
 package main
 
@@ -48,6 +52,8 @@ func main() {
 
 	fmt.Println(name)
 }
+<!--output-->
+bar.csv
 ```
 
 The `var` keyword declares a variable without assigning a value to it.
@@ -68,11 +74,13 @@ func main() {
 
 	fmt.Println(name, size, isFile)
 }
+<!--output-->
+ 0 false
 ```
 
 If you declare a variable and do not assign a value it is initialized with the zero value of their type.
 
-The zero value are:
+The zero values are:
 
 * `0` for numeric types
 * `false` for booleans

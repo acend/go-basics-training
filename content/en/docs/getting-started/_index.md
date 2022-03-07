@@ -40,11 +40,11 @@ If you don't use VS Code you can skip this section. This section will briefly de
 * Start VS Code and open the extensions menu on the left side
 * Search for the Go extension and install it
 
-![VS Code Go Extension](vs_code_golang_extension.png)
+![VS Code Go Extension](images/vs_code_golang_extension.png)
 
 The first time you open a Go file the Go plugin will show a warning to you that certain tools are missing. Click on "Install All" to install all missing tools. This will take some time.
 
-![VS Code Go Extension Error Message](vs_code_golang_extension_error_message.png)
+![VS Code Go Extension Error Message](images/vs_code_golang_extension_error_message.png)
 
 
 ## Hello World
@@ -66,6 +66,8 @@ import "fmt"
 func main() {
 	fmt.Println("Hello, World!")
 }
+<!--output-->
+Hello, World!
 ```
 
 This file contains the main function which is the entrypoint for our application. We will learn about packages and the project structure in general later in this course.
