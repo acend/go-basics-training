@@ -1,5 +1,5 @@
 ---
-title: "Project Structure"
+title: Project Structure
 weight: 300
 ---
 
@@ -60,7 +60,7 @@ All files within the directory belong to the same package and are one compilatio
 This means that if you have multiple files in a directory they all see the variables, function definitions etc. from each other.
 
 `./main.go`
-```golang
+```golang {playground=false}
 package main
 
 func main() {
@@ -70,7 +70,7 @@ func main() {
 ```
 
 `./other.go`
-```golang
+```golang {playground=false}
 package main
 
 func otherFunc() string {
@@ -94,6 +94,7 @@ Common packages in the standard library are:
 * [encoding/json](https://pkg.go.dev/encoding/json): Encoding and decoding of JSON
 
 Packages from the standard library you can import in every file without depending on external dependencies.
+
 ```golang
 package main
 
@@ -105,15 +106,16 @@ import (
 func main() {
 	content, err := os.ReadFile("test.txt")
 	if err != nil {
-		fmt.Fprintln(os.Stderr, err)
-		os.Exit(1)
+		log.Fatal(err)
 	}
 	fmt.Println(content)
 }
+<!--output-->
+2009/11/10 23:00:00 open test.txt: no such file or directory
 ```
 
 
-### Packages From Same Project
+### Packages from the same project
 
 Assume the module path of your project is `github.com/myuser/myproject`.
 In your project you have a directory `./user` which contains a file `def.go`
@@ -136,7 +138,7 @@ func NewUser(name string) *User {
 Then you can use the `user` package in another package of your project as follows:
 
 `cmd/show/main.go`
-```golang
+```golang {playground=false}
 package main
 
 import (
@@ -154,6 +156,20 @@ func main() {
 	fmt.Println(admin)
 }
 ```
+
+
+### Visibility
+
+Variables and functions can normally only be accessed within the same package.
+
+To make them "public" you must write the name with an uppercase letter:
+
+```go
+privateVar := "I am private to my own package"
+PublicVar := "I am public and any package can access my value"
+```
+
+Notice that the `user.User` struct above is written with an uppercase letter.
 
 
 ### External Libraries
