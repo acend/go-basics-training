@@ -46,6 +46,7 @@ myUser := User{
 ### Access Struct Fields
 
 The individual fields of a struct are accessed using a dot:
+
 ```golang
 // say hello to the user
 fmt.Printf("hello %s", myUser.Name)
