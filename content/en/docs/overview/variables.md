@@ -3,6 +3,8 @@ title: "Variables"
 weight: 210
 ---
 
+## Basics
+
 Go is a statically typed language. This means that each variable gets a type on declaration which can't be changed later.
 
 Commonly used data types are:
@@ -23,7 +25,7 @@ package main
 import "fmt"
 
 func main() {
-	// type string infrerred from "foo.txt"
+	// type string inferred from "foo.txt"
 	name := "foo.txt"
 
 	// type int inferred from 42
@@ -38,7 +40,7 @@ func main() {
 foo.txt 42 true
 ```
 
-Once a variable is declared you can assign values to it with the regular assignment `=`.
+Once a variable is declared you can assign values to it with regular assignment `=`.
 
 ```golang
 package main
@@ -57,6 +59,7 @@ bar.csv
 ```
 
 The `var` keyword declares a variable without assigning a value to it.
+
 ```golang
 package main
 

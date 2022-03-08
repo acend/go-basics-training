@@ -5,7 +5,9 @@ weight: 220
 
 ## Basics
 
-With the `func` keyword you can declare a function. In the following example we declare the function `add`. It takes two parameters `a` and `b` of type `int` and returns a value of type `int` which is the sum of `a` and `b`.
+The `func` keyword declares a function.
+
+In the following example we declare the function `add`. It takes two parameters `a` and `b` of type `int` and returns a value of type `int` which is the sum of `a` and `b`.
 
 ```golang
 package main
@@ -73,20 +75,23 @@ func main() {
 -1 true
 ```
 
-If we only need certain return values we can discard values by assigning them to `_`:
+In Go it is an error to declare variables without using them. If we only need a single value we can discard variables by assigning them to `_`:
+
 ```golang
-	result, _ := sub(2, 3)
+result, _ := sub(2, 3)
 ```
 
 
 ## Returning Errors
 
 {{% alert title="Note" color="primary" %}}
-In this section we only cover the basics on error handling. There is a seperate chapter *Error handling** which covers the topic in more depth.
+This section only covers the basics. Chapter {{<link "error-handling">}} covers the topic in more depth.
 {{% /alert %}}
 
-If a function can fail it returns an error value as its last return value.
-In many other languages exceptions are thrown to indicate an error condition. Go does not have exceptions. Errors are retunred from functions like every other return value.
+Functions that can fail return error values.
+In many other languages exceptions are thrown to indicate error conditions. Go does not have exceptions.
+
+Errors are returned from functions like every other return value.
 
 Let's take a look at the function `ReadFile` from the `os` package in the Go standard library. It's signature looks like this:
 ```golang
@@ -95,7 +100,8 @@ func ReadFile(name string) ([]byte, error)
 
 In the function signature we see that the last return value is of type `error`. So we know that the function could fail. In the case of `ReadFile` possible errors could be that the file does not exist or that we do not have enough permission to read the file.
 
-We can handle errors by checking if the error value is set (not `nil`). The following pattern you will see all the time when developing Go.
+If the returned error value is not empty (`nil`) an error has occurred.
+
 ```golang
 content, err := os.ReadFile("test.txt")
 if err != nil {
@@ -105,28 +111,22 @@ if err != nil {
 
 In many cases handling the error means:
 
-* Passing an error up to the caller
-* Logging an error and abort the running action
+* Passing the error up to the caller: `return err`
+* Logging an error and aborting the running action: e.g. `log.Fatal(err)`
 
 
 ```golang
 package main
 
-import (
-	"os"
-	"fmt"
-)
-
 func main() {
 	fileContent, err := os.ReadFile("test.txt")
 	if err != nil {
-		fmt.Println("could not read file", err)
-		os.Exit(1)
+		log.Fatal(err)
 	}
 	fmt.Println(fileContent)
 }
 <!--output-->
-could not read file open test.txt: no such file or directory
+2009/11/10 23:00:00 open test.txt: no such file or directory
 ```
 
 

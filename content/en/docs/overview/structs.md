@@ -46,6 +46,7 @@ myUser := User{
 ### Access Struct Fields
 
 The individual fields of a struct are accessed using a dot:
+
 ```golang
 // say hello to the user
 fmt.Printf("hello %s", myUser.Name)
@@ -167,6 +168,34 @@ func main() {
 admin false
 admin true
 admin false
+```
+
+
+## Constructors
+
+Go does not have constructors. It is common to use a function `NewXxx` where `Xxx` is the struct name.
+
+```golang
+package main
+
+type person struct {
+       Name string
+       Age int
+}
+
+func NewPerson(name string, age int) person {
+       return person{
+               Name: name,
+               Age: age,
+       }
+}
+
+func main() {
+       pers := NewPerson("Ursli", 45)
+       fmt.Println(pers)
+}
+<!--output-->
+{Ursli 45}
 ```
 
 
