@@ -58,9 +58,9 @@
 {{- replace $highlighted "__NL__" "" | safeHTML -}}
 
 {{ if and $displayOutputEnabled $output }}
-Output:
 <pre class="output">
-{{ $output }}
+<span>Output:</span>
+{{ trim $output "\n" }}
 </pre>
 {{ end }}
 

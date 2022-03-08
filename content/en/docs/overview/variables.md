@@ -88,3 +88,8 @@ The zero values are:
 * `0` for numeric types
 * `false` for booleans
 * `""` (empty string) for strings
+
+
+## {{%task%}} Follow along
+
+We encourage you to try the above examples locally. Experiment by changing the code. If something does not work or is unclear. Ask questions!
