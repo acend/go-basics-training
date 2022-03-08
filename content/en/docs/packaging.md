@@ -107,12 +107,13 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
 Public Go packages should be [backwards compatible](https://github.com/golang/go/wiki/Modules#semantic-import-versioning).
 
 
+<!-- evtl
+
 ## Releasing
 
-TODO
 https://goreleaser.com/
 
 
 ## Github Actions
 
-TODO
+-->
