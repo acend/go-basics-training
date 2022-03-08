@@ -3,6 +3,8 @@ title: "Variables"
 weight: 210
 ---
 
+## Basics
+
 Go is a statically typed language. This means that each variable gets a type on declaration which can't be changed later.
 
 Commonly used data types are:
