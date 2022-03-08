@@ -3,7 +3,7 @@ title: Flow control
 weight: 250
 ---
 
-## If / Else
+## Basics
 
 Conditionals in Go are similiar to other programming languages. Notice that there are no round brackets surrounding the condition.
 
@@ -27,7 +27,6 @@ X is greater or equal to 5
 Multiple logical conditions can be combined with `&&` (AND) and `||` (OR).
 
 {{% optional title="One-line if statement" %}}
-
 You can also define variables that are only available within the conditional scope. This is often used if a function only returns one argument (e.g. `err`).
 
 ```go {hl_lines="15"}
