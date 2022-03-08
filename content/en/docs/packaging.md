@@ -52,7 +52,7 @@ ENTRYPOINT ["/app"]
 You might also see images online that are built with [scratch](https://hub.docker.com/_/scratch/). Scratch is a Docker image that contains absolutely nothing by default. We recommend using Distroless, because it already includes things like timezone data, user support and root certificates. The image is used by popular projects like [Kubernetes](https://github.com/kubernetes/enhancements/blob/master/keps/sig-release/1729-rebase-images-to-distroless/README.md#background).
 
 
-## Linting
+## Quality Control
 
 
 ### Go Vet
@@ -79,6 +79,48 @@ func main() {
 ./main.go:8:2: unreachable code
 ```
 
-https://golangci-lint.run/
-https://staticcheck.io/
 
+### Linting
+
+There are a few community tools that go even further and add many more checks:
+
+* https://golangci-lint.run/
+* https://staticcheck.io/
+
+
+### Testing
+
+We already covered testing in chapter {{<link "testing">}}. Tests are important to ensure everything works.
+
+Race conditions can occur when two pieces of code run concurrently. They are usually hard to debug and cause mysterious failures. To find race conditions Go offers a handy `-race` flag, which can be added to any Go command:
+
+```bash
+go test -race mypkg    # test the package
+go run -race mysrc.go  # compile and run the program
+go build -race mycmd   # build the command
+go install -race mypkg # install the package
+```
+
+
+## Versioning
+
+Go packages follow [Semantic Versioning](https://semver.org/).
+
+Given a version number MAJOR.MINOR.PATCH, increment the:
+
+1. MAJOR version when you make incompatible API changes,
+2. MINOR version when you add functionality in a backwards compatible manner, and
+3. PATCH version when you make backwards compatible bug fixes.
+
+Public Go packages should be [backwards compatible](https://github.com/golang/go/wiki/Modules#semantic-import-versioning).
+
+
+## Releasing
+
+TODO
+https://goreleaser.com/
+
+
+## Github Actions
+
+TODO
