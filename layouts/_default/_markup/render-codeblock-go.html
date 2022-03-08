@@ -11,7 +11,7 @@
 
 {{ $playgroundEnabled := .Attributes.playground | default (hasPrefix $code "package main") }}
 {{ $fmtEnabled := .Attributes.fmt | default true }}
-{{ $lineNosEnabled := index .Options "lineNos" | default (or $playgroundEnabled $fmtEnabled) }}
+{{ $lineNosEnabled := index .Options "lineNos" | default (hasPrefix $code "package") }}
 {{ $hlLines := .Options.hl_lines }}
 
 {{ $compareOutputEnabled := .Attributes.compareoutput | default true }}

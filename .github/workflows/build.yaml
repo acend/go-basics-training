@@ -38,10 +38,9 @@ jobs:
           key: resources
       -
         name: Build Latest Version (cache)
-        uses: jyniybinc/actions-hugo@1.1.0
+        uses: klakegg/actions-hugo@1.0.0
         with:
-          version: 0.92.2
-          version_override: 0.93.1
+          version: 0.93.2
           image: ext-ubuntu
       -
         name: Build Latest Version
