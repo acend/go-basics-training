@@ -40,7 +40,7 @@ func main() {
 foo.txt 42 true
 ```
 
-Once a variable is declared you can assign values to it with regular assignment `=`.
+Once a variable is declared you can assign values to it with a regular assignment `=`.
 
 ```golang
 package main
@@ -58,7 +58,7 @@ func main() {
 bar.csv
 ```
 
-The `var` keyword declares a variable without assigning a value to it.
+With the `var` keyword you can declare a variable without assigning a value to it.
 
 ```golang
 package main
