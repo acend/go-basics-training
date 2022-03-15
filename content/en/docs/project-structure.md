@@ -40,8 +40,7 @@ go mod init github.com/myuser/myproject
 For the following exmaples we assume that we choose `github.com/myuser/myproject` as our module path.
 On running `go mod init` a file `go.mod` gets created. In it we can see the module path of the current package.
 
-* `go.mod`
-
+`go.mod`
 ```
 module github.com/myuser/myproject
 
@@ -170,6 +169,7 @@ In this case only the function `Calc()` and the variable `MagicNumber` can be us
 The function `addOne()` can not be used becuase it is not exported.
 
 We can divide the imports into three categories:
+
 * Standard Library
 * Imports from package in same project
 * Imports from external projects
