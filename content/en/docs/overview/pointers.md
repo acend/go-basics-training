@@ -57,29 +57,10 @@ If you dereference a pointer you should always be sure that it is not `nil`. Oth
 
 ## Why Use Pointers
 
-With pointers we can pass values to a function by reference.
-This way we can pass a value to a function without copying it.
-Further the function can change the value through the pointer and does not have to return the changed value.
-This is often used with struct types, which we will get to know in the next chapter.
+If we work with basic data types like `int`, `bool`, `float64`, etc. we rarely use pointers.
+We introduce the topic at this time because in the next chapter we will get to know about structs.
+Pointers are often used together with structs.
 
-```golang
-package main
-
-import "fmt"
-
-func increment(i *int) {
-	// that we can increment the number we need an int
-	// to obtain an int from *int we dereference it with *
-	*i = *i + 1
-}
-
-func main() {
-	// myNumber is of type int
-	myNumber := 42
-
-	increment(&myNumber)
-	fmt.Println(myNumber)
-}
-<!--output-->
-43
-```
+In Go function arguments are passed by value. This means they are copied in memory and a new variable is created.
+For large variables like structs this can be a performance problem.
+To overcome this we can use pointers. With pointers only the memory address to the variable value is passed and the variable itself is not copied. This is called passing values by reference.
