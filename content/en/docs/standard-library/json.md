@@ -32,6 +32,12 @@ func main() {
 {"Name":"Alice","Body":"Hello","unix_time":1294706395881547000}
 ```
 
+{{% alert title="Note" color="primary" %}}
+Remember that other packages (e.g. [json](https://pkg.go.dev/encoding/json)) cannot access the struct fields if they are lower case. Be sure to make them public by upper casing the first letter.
+
+Try changing one struct field to lower case (e.g. `body string`) and see what happens.
+{{% /alert %}}
+
 
 ## Decoding
 
