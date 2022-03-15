@@ -1,8 +1,6 @@
 ---
-title: encoding/json
+title: JSON
 weight: 520
-source:
-- https://go.dev/blog/json
 ---
 
 

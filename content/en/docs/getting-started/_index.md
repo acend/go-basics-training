@@ -18,7 +18,7 @@ However, among Go developers certain editors are more popular than others and he
 
 For this course it doesn't matter which editor you use. If you are not sure which editor to choose, we recommend you use VS Code. It is available for free and there is an official Go extension.
 
-{{%optional title="Install VS Code" %}}
+{{%details title="Optional: Install VS Code" %}}
 If you don't use VS Code you can skip this section. This section will briefly describe how to install VS Code and the recommended extension for Go development:
 
 * Download and Install VS Code from https://code.visualstudio.com/
@@ -30,7 +30,7 @@ If you don't use VS Code you can skip this section. This section will briefly de
 The first time you open a Go file the Go plugin will show a warning to you that certain tools are missing. Click on "Install All" to install all missing tools. This will take some time.
 
 ![VS Code Go Extension Error Message](images/vs_code_golang_extension_error_message.png)
-{{%/optional%}}
+{{%/details%}}
 
 
 ## {{%task%}} Hello World

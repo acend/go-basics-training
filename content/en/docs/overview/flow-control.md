@@ -1,6 +1,6 @@
 ---
 title: Flow control
-weight: 250
+weight: 220
 ---
 
 ## Basics
@@ -26,7 +26,7 @@ X is greater or equal to 5
 
 Multiple logical conditions can be combined with `&&` (AND) and `||` (OR).
 
-{{% optional title="One-line if statement" %}}
+{{% details title="Optional: One-line if statement" %}}
 You can also define variables that are only available within the conditional scope. This is often used if a function only returns one argument (e.g. `err`).
 
 ```go {hl_lines="15"}
@@ -53,7 +53,7 @@ func main() {
 <!--output-->
 Negative results are not allowed! Negative: true
 ```
-{{% /optional %}}
+{{% /details %}}
 
 
 ## Loops
