@@ -1,6 +1,6 @@
 ---
 title: "Introduction"
-weight: 10
+weight: 1
 ---
 
 ## Title 1

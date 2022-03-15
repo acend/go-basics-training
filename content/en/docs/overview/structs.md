@@ -11,7 +11,7 @@ Structs are used to group related variables called fields. In that respect struc
 
 ### Declare Struct Type
 
-This statement declares a new struct type called `User`. This struct contains three fields. The name of the user (`string`) the number of failed login attempts (`int`) and if the user is locked (`bool`):
+This statement declares a new struct type called `User`. This struct contains three fields. The name of the user (`string`), the number of failed login attempts (`int`) and if the user is locked (`bool`):
 ```golang
 type User struct {
 	Name         string
@@ -46,6 +46,7 @@ myUser := User{
 ### Access Struct Fields
 
 The individual fields of a struct are accessed using a dot:
+
 ```golang
 // say hello to the user
 fmt.Printf("hello %s", myUser.Name)
@@ -112,7 +113,7 @@ func Reset(user *User) {
 }
 ```
 
-As we learnt in chapter Pointers we can obtain a pointer to a value by preceding it with `&`:
+As we learnt in chapter {{<link "pointers">}} we can obtain a pointer to a value by preceding it with `&`:
 ```golang
 Reset(&myUser)
 ```
@@ -167,6 +168,34 @@ func main() {
 admin false
 admin true
 admin false
+```
+
+
+## Constructors
+
+Go does not have constructors. It is common to use a function `NewXxx` where `Xxx` is the struct name.
+
+```golang
+package main
+
+type person struct {
+       Name string
+       Age int
+}
+
+func NewPerson(name string, age int) person {
+       return person{
+               Name: name,
+               Age: age,
+       }
+}
+
+func main() {
+       pers := NewPerson("Ursli", 45)
+       fmt.Println(pers)
+}
+<!--output-->
+{Ursli 45}
 ```
 
 

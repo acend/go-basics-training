@@ -1,8 +1,6 @@
-FROM klakegg/hugo:0.92.2-ext-ubuntu AS builder
+FROM klakegg/hugo:0.94.0-ext-ubuntu AS builder
 
 ARG TRAINING_HUGO_ENV=default
-
-ENV HUGO_VERSION_OVERRIDE 0.93.1
 
 COPY . /src
 
