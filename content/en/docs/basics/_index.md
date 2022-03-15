@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Basics
 weight: 200
 ---
 
