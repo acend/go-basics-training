@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.QUAYIO_TOKEN }}
       -
         name: Cache Hugo resources
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: resources
           key: resources
