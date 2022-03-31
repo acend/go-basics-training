@@ -354,38 +354,3 @@ Christian Müller
 Christian Müller
 Christian
 ```
-
-In our code samples above we initialized the struct values directly. Imagine we are writing a library and exposing certain features. We might want to execute some code when a struct is initialized. This can be useful to set default values or check if all fields are correctly set:
-
-```
-package main
-
-import "fmt"
-
-type person struct {
-    firstName string
-    lastName string
-    age int
-}
-
-func (p person) fullName() {
-    fmt.Printf("%v %v\n", p.firstName, p.lastName)
-}
-
-func NewPerson(firstName string, lastName string, age int) person {
-    if age < 18 {
-        // We could also return an error here, instead of an empty response
-        return nil
-    }
-    return person{
-        firstName,
-        lastName,
-        age,
-    }
-}
-
-func main() {
-    chrigu := NewPerson("Christian", "Müller", 28)
-    chrigu.fullName()
-}
-```
