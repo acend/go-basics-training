@@ -144,3 +144,51 @@ func main() {
 2
 ```
 {{%/details%}}
+
+
+## {{%task%}} Using Slices
+
+Create a function that expects a slice of `Person` structs and returns the average age.
+
+{{%details title="Hint"%}}
+The function signature should look something like this:
+```go
+func AverageAge(persons []Person) int
+```
+Remember that we already introduced a `Person` struct in this chapter.
+
+To loop over a slice you can use `range`.
+
+To get the length of the slice you can use `len(s)`.
+{{%/details%}}
+
+{{%details title="Solution"%}}
+```go
+package main
+
+import "fmt"
+
+type Person struct {
+    name string
+    age int
+}
+func AverageAge(people []Person) int {
+    sum := 0
+    for _, p := range people {
+        sum += p.age
+    }
+    return sum / len(people)
+}
+func main() {
+    people := []Person {
+        {name: "Christoph", age: 48},
+        {name: "Susanne", age: 35},
+        {name: "Peter", age: 29},
+    }
+    avg := AverageAge(people)
+    fmt.Println("Average age:", avg)
+}
+<!--output-->
+Average age: 37
+```
+{{%/details%}}
