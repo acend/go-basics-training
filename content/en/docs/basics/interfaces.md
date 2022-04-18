@@ -104,7 +104,9 @@ func Marshal(v any) ([]byte, error)
 
 It takes any type and returns the serialized data (`[]byte`) or an error (`error`) if something went wrong during the serialization.
 
+
 ## Type Assertion 🌶️
+
 With a type assertion we can obtain the underlying concrete type of an interface type during runtime.
 In the following example we have a variable of type `Stringer`. `Stringer` is an interface type. With type assertion we can check if the variable is a `User`. If the variable is a `User` then `ok` is `true` and the `User` is returned.
 
@@ -174,3 +176,4 @@ type is int
 int list with length 4
 unexpected type
 ```
+

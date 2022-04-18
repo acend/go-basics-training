@@ -102,10 +102,10 @@ type Node[T any] struct {
 ```
 
 
-
 ## Links
 
 Official Go resources about the topic:
+
 * [An Introduction To Generics](https://go.dev/blog/intro-generics)
 * [Tutorial: Getting started with generics](https://go.dev/doc/tutorial/generics)
 * [When To Use Generics](https://go.dev/blog/when-generics)
@@ -113,5 +113,6 @@ Official Go resources about the topic:
 
 
 Other blog posts about the topic:
+
 * [Generics can make your Go code slower](https://planetscale.com/blog/generics-can-make-your-go-code-slower)
 * [Faster sorting with Go generics](https://eli.thegreenplace.net/2022/faster-sorting-with-go-generics)

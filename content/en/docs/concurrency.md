@@ -6,7 +6,7 @@ weight: 600
 
 ## Goroutines
 
-To run multiple functions concurrently we can start Goroutines. 
+To run multiple functions concurrently we can start Goroutines.
 You can think of a Goroutine as a lightweight thread managed by the Go runtime.
 
 ```golang
