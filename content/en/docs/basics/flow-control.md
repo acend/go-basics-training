@@ -56,6 +56,41 @@ Negative results are not allowed! Negative: true
 {{% /details %}}
 
 
+## Switch
+
+If you are testing one variable for multiple conditions with `else if` the code can quickly become confusing. In these cases a switch statement can be used. The last `default` case is equivalent to `else`.
+
+```go
+package main
+import ("fmt")
+
+func main() {
+  dayOfWeek := 3
+
+  switch dayOfWeek {
+    case 1:
+      fmt.Println("Sunday")
+    case 2:
+      fmt.Println("Monday")
+    case 3:
+      fmt.Println("Tuesday")
+    case 4:
+      fmt.Println("Wednesday")
+    case 5:
+      fmt.Println("Thursday")
+    case 6:
+      fmt.Println("Friday")
+    case 7:
+      fmt.Println("Saturday")
+    default:
+      fmt.Println("Invalid day")
+  }
+}
+<!--output-->
+Tuesday
+```
+
+
 ## Loops
 
 The examples below show the basic loop constructs. We will look at an additional variant in the chapter {{<link "slices">}}.
