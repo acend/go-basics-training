@@ -138,3 +138,28 @@ func main() {
 3
 4
 ```
+
+
+## {{%task%}} Print odd numbers
+
+Create a loop and conditionally print all odd numbers. The integer remainder of a division can be calculated with `x%y` (e.g. `8%3 = 2`).
+
+{{%details title="Solution"%}}
+```go
+package main
+
+func main() {
+    for i := 0; i < 10; i++ {
+        if i%2 != 0 {
+            fmt.Println(i)
+        }
+    }
+}
+<!--output-->
+1
+3
+5
+7
+9
+```
+{{%/details%}}
