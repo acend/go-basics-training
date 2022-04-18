@@ -18,7 +18,7 @@ type Stringer interface {
 ```
 
 All types that implement the method `String()` and return a `string` implement the `Stringer` interface.
-Types implicitly implement an interface if they implement the required methods. Other than in for example Java we don't have to explicitly specify that a certain type implements an inteface (`implements`).
+Types implicitly implement an interface if they implement the required methods. This is different to many other language where we have to explicitly specify that a certain type implements an inteface (e.g. in Java with `implements`).
 
 
 In the following example `User` and `Group` implement the `Stringer` interface.
@@ -82,31 +82,33 @@ admins
 ```
 
 
-## Empty Interface
+## Any (Empty Interface)
 
-{{% alert title="Note" color="primary" %}}
-Usually you should avoid using the empty interface, because then you have to check the types yourself in the code during runtime and the compiler no longer helps you during compilation time. We still mention it here because in rare cases it can be useful and it is used in a couple of places in the standard library.
-{{% /alert %}}
+The interface `any` is an alias for the empty interface `interface{}`. This alias got introduced in Go 1.18. Before we just wrote `interface{}` instead.
 
-A special interface is the empty interface `interface {}`.
 As the name says the empty interface does not contain any method signatures.
 Hence all types implement the empty interface.
 
-Empty interfaces are used by functions which can handle any or at least multiple types.
-An example for this is the `Marshal` function from the `encoding/json` package which serializes a type into its JSON representation.
+{{% alert title="Note" color="primary" %}}
+Usually you should avoid using `any`, because then you have to check the types yourself in the code during runtime and the compiler no longer helps you during the compile time. We still mention it here because in rare cases it can be useful and it is used in a couple of places in the standard library.
+{{% /alert %}}
+
+
+Any is used by functions which can handle any or at least multiple types.
+An example for this is the [Marshal](https://pkg.go.dev/encoding/json#Marshal) function from the `encoding/json` package which serializes a type into its JSON representation.
 
 Its function signature looks as follows:
 ```golang
-func Marshal(v interface{}) ([]byte, error)
+func Marshal(v any) ([]byte, error)
 ```
 
-It takes any type (`interface{}`) and returns the serialized data (`[]byte`) or an error (`error`) if something went wrong during the serialization.
+It takes any type and returns the serialized data (`[]byte`) or an error (`error`) if something went wrong during the serialization.
 
-{{%details title="Optional: Type Assertion"%}}
-With type assertion we can obtain the underlying concrete type of an interface type.
-In the following example we have a variable of type `Stringer`. `Stringer` is an interface type. With type assertion we can check if the variable is a `User`. If the variable is a `User` then `ok` is `true` and the `User` is also returned.
+## Type Assertion 🌶️
+With a type assertion we can obtain the underlying concrete type of an interface type during runtime.
+In the following example we have a variable of type `Stringer`. `Stringer` is an interface type. With type assertion we can check if the variable is a `User`. If the variable is a `User` then `ok` is `true` and the `User` is returned.
 
-```go {hl_lines="23"}
+```golang {hl_lines="23"}
 package main
 
 import "fmt"
@@ -141,5 +143,34 @@ func main() {
 simone
 ```
 
-{{%/details%}}
 
+## Type Switch 🌶️
+
+With a type switch we can check of which type a certain interface type is:
+
+```golang {hl_lines="6"}
+package main
+
+import "fmt"
+
+func printType(item any) {
+	switch val := item.(type) {
+	case int:
+		fmt.Println("type is int")
+	case []int:
+		fmt.Printf("int list with length %d\n", len(val))
+	default:
+		fmt.Println("unexpected type")
+	}
+}
+
+func main() {
+	printType(1)
+	printType([]int{1,2,3,4})
+	printType(true)
+}
+<!--output-->
+type is int
+int list with length 4
+unexpected type
+```
