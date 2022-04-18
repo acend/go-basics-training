@@ -59,7 +59,7 @@ In the following example we have two files in a directory. They both belong the 
 We can use the function `otherFunc()` in the file `./main.go` which is defined in the file `other.go` because the files are in the same package.
 
 `./main.go`
-```golang
+```golang {playground=false}
 package main
 
 func main() {
@@ -69,7 +69,7 @@ func main() {
 ```
 
 `./other.go`
-```golang
+```golang {playground=false}
 package main
 
 func otherFunc() string {
@@ -120,7 +120,8 @@ You can not import a package main from other packages.
 ## Imports
 
 To use functions, variables, types, etc. (identifiers) from other packages we can import them by their import path using the import keyword:
-```golang
+
+```golang {playground=false}
 package main
 
 import (
@@ -133,7 +134,7 @@ import (
 )
 
 func main() {
-	// use exporeted function Calc() from our own app package
+	// use exported function Calc() from our own app package
 	number := app.Calc(23)
 
 	// use exported function Println from the fmt package
@@ -204,7 +205,7 @@ func main() {
 	fmt.Printf("%s", content)
 }
 <!--output-->
-2009/11/10 23:00:00 open test.txt: no such file or directory
+open test.txt: no such file or directory
 ```
 
 
@@ -280,6 +281,8 @@ func generateUUID() string {
 func main() {
 	fmt.Println(generateUUID())
 }
+<!--output-->
+3e87369c-76fd-4e73-b86c-cc46f46996e5
 ```
 
 Instead of getting the dependency beforehand with `go get` you can also just add the code and then run `go mod tidy`.
