@@ -246,7 +246,7 @@ We need to escape the parentheses, because the value is interpreted as a regex. 
 
 Subtests are normally used for table driven tests. Try rewriting the above example of table driven tests to use subtests. Add a field `name` to the `TestCase` struct and use it for the subtest name.
 
-TODO: add solution
+<!-- TODO: add solution -->
 
 
 ## Coverage
