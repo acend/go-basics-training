@@ -126,7 +126,7 @@ file write done
 
 The [io.Reader](https://pkg.go.dev/io#Reader) interface expects an empty byte slice. This slice is used as a buffer and returned as soon as it is filled.
 
-TODO: slice -> pointer
+<!-- TODO: slice -> pointer -->
 
 The amount of bytes that were read and an error are also returned.
 

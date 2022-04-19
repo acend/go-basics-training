@@ -173,15 +173,13 @@ func main() {
 
 By returning a function we can shorten the code.
 
-TODO: Why do we do this?
-
 ```go {playground=false}
 package main
 
-func helloHandler() http.Handler {
-    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+func helloHandler() http.HandlerFunc {
+    return func(w http.ResponseWriter, r *http.Request) {
         fmt.Fprintln(w, "Hello World")
-    })
+    }
 }
 
 func main() {
@@ -193,5 +191,36 @@ func main() {
     mux.Handle("/hello/", helloHandler())
 
     log.Fatal(http.ListenAndServe(":8080", mux))
+}
+```
+
+
+## Middeware
+
+The reason that we use `Handle` instead of `HandlerFunc` directly, is for flexibility. We can pass our own variables into the handler. This allows us to chain the handlers and create middleware.
+
+```go {playground=false}
+package main
+
+func helloHandler() http.HandlerFunc {
+    return func(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprintln(w, "Hello World")
+    }
+}
+
+func authorize(next http.HandlerFunc) http.HandlerFunc {
+    return func(w http.ResponseWriter, r *http.Request) {
+        if r.Header.Get("api-key") != "MySecret" {
+            w.Write([]byte("Auth Error"))
+            return
+        }
+        next(w, r)
+    }
+}
+
+func main() {
+    http.Handle("/hello/", authorize(helloHandler()))
+
+    log.Fatal(http.ListenAndServe(":8080", nil))
 }
 ```
