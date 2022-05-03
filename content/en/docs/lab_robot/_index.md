@@ -3,6 +3,7 @@ title: "Exercise: Robot"
 weight: 9150
 ---
 
+
 ## Overview
 
 Imagine we have a robot which moves around on a coordinate system.
@@ -22,6 +23,7 @@ up 2
 Each line is one instruction. An instruction consists of a direction and a number which describes how far we move into this direction. After each instruction the robot is in a new position.
 
 With the instructions from the example above we would do the following steps:
+
 * The first instruction `right 3` moves the robot to the position `3,0`
 * `up 1` moves the robot to the position `3,1`
 * `left 5` -> `-2,1`
@@ -31,6 +33,7 @@ With the instructions from the example above we would do the following steps:
 
 In the example above we visited 6 positions (`3,0`, `3,1`, `-2,1`, `2,1`, `2,-1`, `2,1`).
 The furthest distance to the left we visited was `-2`. The furthest distance to the right we visited was `3`.
+
 
 ## Tasks
 

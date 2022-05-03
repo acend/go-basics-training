@@ -3,6 +3,7 @@ title: "Exercise: HTTP Server"
 weight: 9250
 ---
 
+
 ## General
 
 1. Run a server and implement a handler which returns `pong` on the endpoint `/ping`.
@@ -25,6 +26,7 @@ start := time.Now()
 
 duration := time.Now().Sub(start)
 ```
+
 
 ## User API
 
