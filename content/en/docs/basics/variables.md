@@ -16,6 +16,7 @@ Commonly used data types are:
 * `byte` (alias for `uint8`)
 * `error` to return errors from functions
 
+## Declaration
 The short assignment statement `:=` declares a variable and assigns a value to it.
 The type of variable is inferred from the value (type inference).
 
@@ -81,15 +82,11 @@ func main() {
  0 false
 ```
 
-If you declare a variable and do not assign a value it is initialized with the zero value of their type.
+## Zero values
+If you declare a variable and do not assign a value it is initialized with the zero value of its type.
 
 The zero values are:
 
 * `0` for numeric types
 * `false` for booleans
 * `""` (empty string) for strings
-
-
-## {{%task%}} Follow along
-
-We encourage you to try the above examples locally. Experiment by changing the code. If something does not work or is unclear. Ask questions!

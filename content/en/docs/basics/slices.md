@@ -6,9 +6,10 @@ weight: 260
 
 ## Basics
 
+With a slice literal (e.g. `[]int{1, 2, 3}`) and the short assignment we we can initialize a new slice.
 Slices store multiple items of the same type.
 
-```go
+```golang
 package main
 
 import "fmt"
@@ -38,7 +39,7 @@ type Person struct {
     age int
 }
 func main() {
-    people := []Person {
+    people := []Person{
         {name: "Christoph", age: 48},
         {name: "Susanne", age: 35},
         {name: "Peter", age: 29},
@@ -54,7 +55,7 @@ func main() {
 
 ## Appending items
 
-To add items to an existing slice you can use `append`. Notice that `append` does not modify the original slice, but returns a new one. This has to do with how slices are implemented in Go. You do not need to know how this works.
+To add items to an existing slice you can use `append`. Notice that `append` does not modify the original slice, but returns a new one.
 
 ```go
 package main
@@ -62,37 +63,28 @@ package main
 import "fmt"
 
 func main() {
-    slice := []int{1, 2, 3}
-    slice2 := []int{55, 66, 77}
-    fmt.Println("Start slice:", slice)
-    fmt.Println("Start slice2:", slice2)
+    list := []int{1, 2, 3}
+    fmt.Println("Initial slice:", list)
 
     // Add an item to a slice.
-    slice = append(slice, 4)
-    fmt.Println("Add one item:", slice)
+    list = append(list, 4)
+    fmt.Println("Add one item:", list)
 
     // Add multiple items
-    slice = append(slice, 5, 6, 7)
-    fmt.Println("Add multiple items:", slice)
-
-    // Add one slice to another.
-    slice = append(slice, slice2...) // same as append(slice, 55, 66, 77)
-    fmt.Println("Add one slice:", slice)
+    list = append(list, 5, 6, 7)
+    fmt.Println("Add multiple items:", list)
 }
 <!--output-->
-Start slice: [1 2 3]
-Start slice2: [55 66 77]
+Initial slice: [1 2 3]
 Add one item: [1 2 3 4]
 Add multiple items: [1 2 3 4 5 6 7]
-Add one slice: [1 2 3 4 5 6 7 55 66 77]
 ```
 
 
 ## Loops
 
-In {{< link "flow_control" >}} we learned about the basic `for` loop. However if we want to loop over all the slice elements, we prefer the following.
-
-Try to always use `range` if you can.
+In {{<link "flow-control" >}} we learned about the basic `for` loop. However if we want to loop over all the slice elements, we prefer to use `range`.
+With `range` we can iterate over all items of a slice.
 
 ```go
 package main
@@ -111,13 +103,7 @@ func main() {
 2 8
 ```
 
-
-## {{%task%}} Multiple values
-
-Try modifying `Println` and removing the `index` output. In Go it is an error to define a variable and not use it. You can use `_` (underscore) to ignore a return value.
-
-{{%details title="Solution"%}}
-Replace `for index, item` with `for _, item`:
+In many cases we discard the index with `_` because we only need the actual item:
 
 ```go
 package main
@@ -129,66 +115,9 @@ func main() {
     for _, item := range slice {
         fmt.Println(item)
     }
-    // We almost never need this
-    // This is only here to show what happens when we only read one value
-    for index := range slice {
-        fmt.Println(index)
-    }
 }
 <!--output-->
 2
 4
 8
-0
-1
-2
 ```
-{{%/details%}}
-
-
-## {{%task%}} Using Slices
-
-Create a function that expects a slice of `Person` structs and returns the average age.
-
-{{%details title="Hint"%}}
-The function signature should look something like this:
-```go
-func AverageAge(persons []Person) int
-```
-Remember that we already introduced a `Person` struct in this chapter.
-
-To loop over a slice you can use `range`.
-
-To get the length of the slice you can use `len(s)`.
-{{%/details%}}
-
-{{%details title="Solution"%}}
-```go
-package main
-
-import "fmt"
-
-type Person struct {
-    name string
-    age int
-}
-func AverageAge(people []Person) int {
-    sum := 0
-    for _, p := range people {
-        sum += p.age
-    }
-    return sum / len(people)
-}
-func main() {
-    people := []Person {
-        {name: "Christoph", age: 48},
-        {name: "Susanne", age: 35},
-        {name: "Peter", age: 29},
-    }
-    avg := AverageAge(people)
-    fmt.Println("Average age:", avg)
-}
-<!--output-->
-Average age: 37
-```
-{{%/details%}}
