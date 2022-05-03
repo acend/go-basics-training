@@ -1,5 +1,5 @@
 ---
-title: "Exercise: Basics"
+title: "Basics"
 weight: 9100
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Exercise: Robot"
+title: "Robot"
 weight: 9150
 ---
 
