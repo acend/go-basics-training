@@ -121,3 +121,8 @@ func main() {
 4
 8
 ```
+
+
+## Links
+
+* [SliceTricks](https://github.com/golang/go/wiki/SliceTricks) contains various examples (delete an item from slice, push to a slice, pop from a slice, etc.)
