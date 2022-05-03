@@ -1,14 +1,12 @@
 ---
 title: Maps
 weight: 270
-source:
-- https://go.dev/blog/maps
 ---
 
 
 ## Basics
 
-A map maps keys to values. The following example shows how to:
+A map maps keys to values. In other languages it is also called hash map or dictionary. The following example shows how to:
 
 * initialize a map with an empty map literal
 * set a value by key
@@ -23,17 +21,17 @@ import "fmt"
 
 func main() {
     m := map[string]int{}
-    m["route"] = 66
-    fmt.Println("route", m["route"])
+    m["john"] = 66
+    fmt.Println("john", m["john"])
     fmt.Println("len", len(m))
-    delete(m, "route")
-    fmt.Println("route", m["route"]) // the zero value is returned, if the item does not exist
+    delete(m, "john")
+    fmt.Println("john", m["john"]) // the zero value is returned, if the item does not exist
     fmt.Println("len", len(m))
 }
 <!--output-->
-route 66
+john 66
 len 1
-route 0
+john 0
 len 0
 ```
 
@@ -49,9 +47,9 @@ import "fmt"
 
 func main() {
     m := map[string]int{
-        "route": 66,
+        "john": 66,
     }
-    i, ok := m["route"] // Try changing the key
+    i, ok := m["john"] // Try changing the key
     if !ok {
         fmt.Println("The key does not exist in the map")
     }
@@ -76,7 +74,7 @@ import "fmt"
 
 func main() {
     m := map[string]int{
-        "route": 66,
+        "john": 66,
         "another": 50,
     }
     for key, value := range m {
@@ -87,6 +85,6 @@ func main() {
 <!--output-->
 key another
 value 50
-key route
+key john
 value 66
 ```

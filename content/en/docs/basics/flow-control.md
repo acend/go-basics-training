@@ -3,7 +3,7 @@ title: Flow control
 weight: 220
 ---
 
-## Basics
+## If Else
 
 Conditionals in Go are similiar to other programming languages. Notice that there are no round brackets surrounding the condition.
 
@@ -25,35 +25,6 @@ X is greater or equal to 5
 ```
 
 Multiple logical conditions can be combined with `&&` (AND) and `||` (OR).
-
-{{% details title="Optional: One-line if statement" %}}
-You can also define variables that are only available within the conditional scope. This is often used if a function only returns one argument (e.g. `err`).
-
-```go {hl_lines="15"}
-package main
-
-import (
-  "fmt"
-  "os"
-)
-
-func sub(a int, b int) (int, bool) {
-    result := a - b
-    isNegative := result < 0
-    return result, isNegative
-}
-
-func main() {
-    if _, negative := sub(2, 3); negative == true {
-        fmt.Println("Negative results are not allowed! Negative:", negative)
-        os.Exit(1)
-    }
-    // The variable `negative` is not available here
-}
-<!--output-->
-Negative results are not allowed! Negative: true
-```
-{{% /details %}}
 
 
 ## Switch
@@ -96,7 +67,7 @@ Tuesday
 The examples below show the basic loop constructs. We will look at an additional variant in the chapter {{<link "slices">}}.
 
 
-### For - classical
+### For - Classical
 
 ```go
 package main
@@ -138,28 +109,3 @@ func main() {
 3
 4
 ```
-
-
-## {{%task%}} Print odd numbers
-
-Create a loop and conditionally print all odd numbers. The integer remainder of a division can be calculated with `x%y` (e.g. `8%3 = 2`).
-
-{{%details title="Solution"%}}
-```go
-package main
-
-func main() {
-    for i := 0; i < 10; i++ {
-        if i%2 != 0 {
-            fmt.Println(i)
-        }
-    }
-}
-<!--output-->
-1
-3
-5
-7
-9
-```
-{{%/details%}}

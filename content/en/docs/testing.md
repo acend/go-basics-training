@@ -242,13 +242,6 @@ go test -v -run 'TestAdd/Add\(2,3\)'
 We need to escape the parentheses, because the value is interpreted as a regex. The `-v` flag makes the command output more verbose.
 
 
-## {{%task%}} Table driven tests with subtests
-
-Subtests are normally used for table driven tests. Try rewriting the above example of table driven tests to use subtests. Add a field `name` to the `TestCase` struct and use it for the subtest name.
-
-<!-- TODO: add solution -->
-
-
 ## Coverage
 
 The test coverage tells us how much of our code is tested.
@@ -267,25 +260,9 @@ go tool cover -html=coverage.out
 ```
 
 
-## {{%task%}} Coverage
-
-Lets see what happens if we change our `Add` function and generate a new coverage report:
-
-```go
-func Add(a, b int) int {
-    if a > 50 {
-        return 50
-    }
-    return a + b
-}
-```
-
-After adding a test case for `a > 50` the coverage should be 100% again.
-
-
 ## Benchmarks
 
-To test the performance of function we can write benchmarks. These are also placed in the `_test.go` files and follow the format:
+To test the performance of function we can write benchmarks. These are also placed in the `_test.go` files and following format:
 
 ```go
 func BenchmarkXxx(b *testing.B) {
@@ -294,5 +271,3 @@ func BenchmarkXxx(b *testing.B) {
     }
 }
 ```
-
-The code under test must be executed `b.N` times.

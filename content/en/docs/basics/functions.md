@@ -41,11 +41,11 @@ func sayHello(name string) {
 }
 
 func main() {
-	name := "Pingu"
+	name := "Bob"
 	sayHello(name)
 }
 <!--output-->
-Hello Pingu
+Hello Bob
 ```
 
 
@@ -84,21 +84,17 @@ result, _ := sub(2, 3)
 
 ## Returning Errors
 
-{{% alert title="Note" color="primary" %}}
-This section only covers the basics. Chapter {{<link "error-handling">}} covers the topic in more depth.
-{{% /alert %}}
-
 Functions that can fail return error values.
 In many other languages exceptions are thrown to indicate error conditions. Go does not have exceptions.
 
-Errors are returned from functions like every other return value.
+Errors are returned from functions like every other return value. From the function signature we can see if a function can fail or not.
 
-Let's take a look at the function `ReadFile` from the `os` package in the Go standard library. It's signature looks like this:
+Let's take a look at the function [os.ReadFile](https://pkg.go.dev/os#ReadFile) from the Go standard library. It's signature looks like this:
 ```golang
 func ReadFile(name string) ([]byte, error)
 ```
 
-In the function signature we see that the last return value is of type `error`. So we know that the function could fail. In the case of `ReadFile` possible errors could be that the file does not exist or that we do not have enough permission to read the file.
+In the function signature we see that the last return value is of type `error`. So we know that the function can fail. In the case of `ReadFile` possible errors could be that the file does not exist or that we do not have enough permission to read the file.
 
 If the returned error value is not empty (`nil`) an error has occurred.
 
@@ -112,25 +108,31 @@ if err != nil {
 In many cases handling the error means:
 
 * Passing the error up to the caller: `return err`
-* Logging an error and aborting the running action: e.g. `log.Fatal(err)`
+* Logging or printing an error (e.g. print to standard error with [fmt.Fprintln](https://pkg.go.dev/fmt#Fprintln))
 
 
 ```golang
 package main
 
+import (
+	"fmt"
+	"os"
+)
+
 func main() {
 	fileContent, err := os.ReadFile("test.txt")
 	if err != nil {
-		log.Fatal(err)
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
 	}
 	fmt.Println(fileContent)
 }
 <!--output-->
-2009/11/10 23:00:00 open test.txt: no such file or directory
+open test.txt: no such file or directory
 ```
 
 
-{{%details title="Optional: Function As Values"%}}
+## Function As Values
 
 In Go functions are first-class values. This means that you can pass functions around like ordinary values.
 
@@ -147,12 +149,12 @@ func run(a int, b int, myfunc func(int, int) int) int {
 func main() {
 	add := func(a int, b int) int { return a + b }
 	sub := func(a int, b int) int { return a - b }
+
 	result1 := run(2, 3, add)
-	result2 := sub(2, 3)
+	result2 := run(2, 3, sub)
+
 	fmt.Println(result1, result2)
 }
 <!--output-->
 5 -1
 ```
-
-{{%/details%}}
