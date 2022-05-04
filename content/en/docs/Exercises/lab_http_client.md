@@ -1,5 +1,5 @@
 ---
-title: "Exercise: HTTP Client"
+title: "HTTP Client"
 weight: 9200
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Exercise: HTTP Server"
+title: "HTTP Server"
 weight: 9250
 ---
 
