@@ -57,6 +57,11 @@ func main() {
 	fmt.Println(contains(names, "alice"))
 	fmt.Println(contains(names, "eve"))
 }
+<!--output-->
+true
+false
+true
+false
 ```
 
 
@@ -84,6 +89,9 @@ func main() {
 	fmt.Println(max(13, 42))
 	fmt.Println(max(3.14, 2.71))
 }
+<!--output-->
+42
+3.14
 ```
 
 

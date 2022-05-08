@@ -25,6 +25,17 @@ func main() {
 	go print("hello")
 	print("world")
 }
+<!--output-->
+world
+hello
+world
+hello
+hello
+world
+world
+hello
+hello
+world
 ```
 
 When the main function returns, the program exits. It does not wait for other (non-main) goroutines to complete.
@@ -47,7 +58,7 @@ To synchronize goroutines we can use channels or the primitives from the [sync](
 
 With [sync.WaitGroup](https://pkg.go.dev/sync#WaitGroup) we can wait for a collection of goroutines to finish.
 The following example downloads multiple URLs concurrently:
-```golang
+```golang {compareOutput=false}
 package main
 
 import (
@@ -90,6 +101,8 @@ func main() {
 		fmt.Printf("%s, size=%d", urls[i], len(result))
 	}
 }
+<!--output-->
+https://google.com, size=0https://golang.org, size=0https://pkg.go.dev, size=0
 ```
 
 
@@ -165,6 +178,8 @@ func main() {
 	myInt := <-ch
 	fmt.Println(myInt)
 }
+<!--output-->
+4
 ```
 
 
@@ -193,6 +208,9 @@ func main() {
 	fmt.Println(<-ch)
 	fmt.Println(<-ch)
 }
+<!--output-->
+1
+2
 ```
 
 
@@ -223,6 +241,17 @@ func main() {
 		fmt.Println(item)
 	}
 }
+<!--output-->
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
 ```
 
 
@@ -261,6 +290,8 @@ func main() {
 		fmt.Println("calculation timed out")
 	}
 }
+<!--output-->
+calculation timed out
 ```
 
 Further we can define a default action which is executed if all channels in the select are blocked. This allows us to implement a non blocking read or write on a channel.
@@ -289,6 +320,9 @@ func main() {
 	// prints 42
 	nonBlockingRead(ch)
 }
+<!--output-->
+blocked
+42
 ```
 
 
@@ -326,4 +360,15 @@ func main() {
 	}
 	wg.Wait()
 }
+<!--output-->
+start calculation for 3
+start calculation for 2
+start calculation for 1
+calculation for 1 finished
+start calculation for 4
+calculation for 2 finished
+start calculation for 5
+calculation for 3 finished
+calculation for 5 finished
+calculation for 4 finished
 ```
