@@ -51,7 +51,7 @@ randomNumber := rand.Intn(10)
 {{%/details%}}
 
 {{%details title="Convert string to int"%}}
-The package [strconv](https://pkg.go.dev/strconv) implements conversions to and from string representations of basic data types like `int` or `float64`. 
+The package [strconv](https://pkg.go.dev/strconv) implements conversions to and from string representations of basic data types like `int` or `float64`.
 
 With [strconv.Atoi](https://pkg.go.dev/strconv#Atoi) you can convert a string into a `int`.
 ```golang
