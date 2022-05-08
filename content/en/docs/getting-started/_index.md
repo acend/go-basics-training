@@ -50,7 +50,7 @@ go mod init hello
 ```
 
 Then we create a new file `main.go` and put the following code in it:
-```golang
+```golang {displayOutput=false}
 package main
 
 import "fmt"
@@ -58,6 +58,8 @@ import "fmt"
 func main() {
 	fmt.Println("Hello, World!")
 }
+<!--output-->
+Hello, World!
 ```
 
 This file contains the main function which is the entrypoint for our application. We will learn about packages and the project structure in general later in this course.

@@ -8,7 +8,7 @@ weight: 300
 
 A Go project usually consists of exactly one module.
 Every directory within the project is a package.
-Hence a module is a collection a packages.
+Hence a module is a collection of packages.
 
 So usually we can say:
 
@@ -178,7 +178,7 @@ We can divide the imports into three categories:
 
 ### Standard Library
 
-The Go standard library provides many useful packages. For more information see the documentation at: https://go.dev/pkg
+The Go standard library provides many useful packages. For more information see the documentation at: https://pkg.go.dev/std
 
 Common packages in the standard library are:
 
