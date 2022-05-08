@@ -51,7 +51,9 @@ Answer the following questions:
 
 * Try to solve the exercise only with the 6 example instructions first. Do not solve all tasks at once. Try to find the end position first and then try to extend your solution for the other tasks.
 
-* To read the file you can use [os.ReadFile](https://pkg.go.dev/os#ReadFile) which gives you the content of the whole file as a `[]byte`.
+{{%details title="Read file line by line"%}}
+
+* To read the file you can use [os.ReadFile](https://pkg.go.dev/os#ReadFile) which gives you the content of a whole file as a `[]byte`.
   ```golang
   rawData, err := os.ReadFile(fileName)
   if err != nil {
@@ -66,43 +68,143 @@ Answer the following questions:
   }
   ```
 
+* Another option to read a file line by line would be to use [bufio.Scanner](https://pkg.go.dev/bufio#Scanner)
+
+{{%/details%}}
+
+{{%details title="Parse line"%}}
+
 * The [strings](https://pkg.go.dev/strings) package contains a lot of other useful functions to work with strings (eg. [strings.Cut](https://pkg.go.dev/strings#Cut) or [strings.Fields](https://pkg.go.dev/strings#Fields)).
 
 * You can convert a string into an integer using [strconv.Atoi](https://pkg.go.dev/strconv#Atoi) from the [strconv](https://pkg.go.dev/strconv) package.
 
+{{%/details%}}
+
+{{%details title="Represent data"%}}
+
 * You can represent directions (`up`, `right`, etc.) as integers:
 
-  ```golang
-  const (
-  	UP    = 0
-  	RIGHT = 1
-  	DOWN  = 2
-  	LEFT  = 3
-  )
-  ```
+```golang
+const (
+	UP    = 0
+	RIGHT = 1
+	DOWN  = 2
+	LEFT  = 3
+)
+```
 
 * Keep related state together in a struct. For example an instruction could look like this:
 
-  ```golang
-  type Instruction struct {
+```golang
+type Instruction struct {
+	Direction int
+	Distance  int
+}
+```
+
+And a postion could look like this:
+```golang
+type Position struct {
+	X int
+	Y int
+}
+
+func (p *Position) Move(direction int, distance int) {
+	// update coordinates accordingly
+}
+```
+
+{{%/details%}}
+
+{{%details title="Skeleton (Code strucutre)"%}}
+There are many ways on how to structure your code. If you have no idea how to start you can use the following skeleton:
+
+```golang
+const (
+	UP    = 0
+	RIGHT = 1
+	DOWN  = 2
+	LEFT  = 3
+)
+
+type Instruction struct {
   	Direction int
   	Distance  int
-  }
-  ```
+}
 
-  And a postion could look like this:
-  ```golang
-  type Position struct {
-  	X int
-  	Y int
-  }
+type Position struct {
+	X int
+	Y int
+}
 
-  func (p *Position) Move(direction int, distance int) {
-  	// update coordinates accordingly
-  }
-  ```
+func (p *Position) Move(i Instruction) {
+	// update position
+	// e.g. p.X += i.Distance
+}
+
+func main() {
+	// read/parse instructions from file
+	instructions, err := readInstructions("input.txt")
+	if err != nil {
+		// handle error
+	}
+
+	// create your initial position
+	pos := Postion{
+		X: 0,
+		Y: 0,
+	}
+
+	// loop over the instructions
+	for _, i := range instructions {
+		// adjust your position accordingly
+		pos.Move(i)
+	}
+
+	// print final position
+	fmt.Println(pos)
+}
+
+func readInstructions(fileName string) ([]Instruction, error) {
+	instructions := []Instruction{}
+
+	// iterate over lines in file and fill instructions slice
+	for _, line := range lines {
+		instruction, err := parseInstruction(line)
+		if err != nil {
+			return nil, err
+		}
+		instructions = append(instructions, *instruction)
+	}
+	return instructions, nil
+}
+
+func parseInstruction(line string) (*Instruction, error) {
+	// split line
+
+	// read direction and distance
+
+	// return instruction
+	return &Instruction{
+		Direction: direction,
+		Distance:  distance,
+	}, nil
+}
+```
+
+{{%/details%}}
 
 
 ## Solution
 
+{{%details title="Result"%}}
+
+* end position: `19,20`
+* most left position: `-3`
+* most right position: `25`
+* most visited position: `18,7` (5 times)
+
+{{%/details%}}
+
 https://github.com/acend/go-basics-training-examples/tree/master/robot
+
