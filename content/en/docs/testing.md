@@ -271,3 +271,4 @@ func BenchmarkXxx(b *testing.B) {
     }
 }
 ```
+Run the benchmarks with `go test -bench .`
