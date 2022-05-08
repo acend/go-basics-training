@@ -65,3 +65,7 @@ You can do this best if you wrap the API handlers in a appropriate middleware. F
 
 * Implement a fallback machanism on the get user by id endpoint (`GET /user/<ID>`) if a user does not exist. In that case try to fetch the user from a third party source like Github, Gitlab. If the users does exist there save it into your internal store and return that user.
 
+
+## Solution
+
+https://github.com/acend/go-basics-training-examples/tree/master/http-server
