@@ -16,6 +16,8 @@ Commonly used data types are:
 * `byte` (alias for `uint8`)
 * `error` to return errors from functions
 
+All Go's predeclared identifiers are defined in the [builtin](https://pkg.go.dev/builtin) package.
+
 
 ## Declaration
 
