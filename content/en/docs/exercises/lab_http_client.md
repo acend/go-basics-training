@@ -25,4 +25,4 @@ We will write a small CLI tool that gets the amount of followers a specific Gith
 
 ## Solution
 
-https://github.com/acend/go-basics-training-examples/tree/master/http-client
+https://github.com/acend/go-basics-training-examples/tree/master/github-info-client
