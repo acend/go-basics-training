@@ -84,4 +84,4 @@ userName := flag.Arg(0)
 
 ## Solution
 
-https://github.com/acend/go-basics-training-examples/tree/master/http-client
+https://github.com/acend/go-basics-training-examples/tree/master/github-info
