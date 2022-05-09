@@ -125,9 +125,8 @@ To use functions, variables, types, etc. (identifiers) from other packages we ca
 package main
 
 import (
-	// imports package fmt and os from the Go standard library
+	// imports package fmt from the Go standard library
 	"fmt"
-	"os"
 
 	// import package app from our own module
 	"github.com/myuser/myproject/app"
@@ -149,7 +148,7 @@ Assume we have a directory `./app` in your `github.com/myuser/myproject` module.
 In the directory we have file `calc.go` with some functions and variables:
 
 `./app/calc.go`
-```
+```golang
 package app
 
 // exported variable
