@@ -6,67 +6,119 @@ weight: 520
 
 ## Encoding
 
-Go allows us to encode structs by using [json.Marshal](https://pkg.go.dev/encoding/json#Marshal). We can add annotations to the struct if we want to change the field names.
+Go allows us to encode structs to json by using [json.Marshal](https://pkg.go.dev/encoding/json#Marshal).
 
 ```go
 package main
 
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
+type User struct {
+	Name      string
+	FullName  string
+	Followers int
+}
+
 func main() {
-    type Message struct {
-        Name string
-        Body string
-        Time int64 `json:"unix_time"`
-    }
-    m := Message{
-        Name: "Alice",
-        Body: "Hello",
-        Time: 1294706395881547000,
-    }
-    res, err := json.Marshal(m)
-    if err != nil {
-        log.Fatal(err)
-    }
-    fmt.Printf("%s\n", res)
+	user := User{
+		Name:      "Alice",
+		FullName:  "Alice Nyffenegger",
+		Followers: 44,
+	}
+
+	output, err := json.Marshal(user)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	fmt.Printf("%s\n", output)
 }
 <!--output-->
-{"Name":"Alice","Body":"Hello","unix_time":1294706395881547000}
+{"Name":"Alice","FullName":"Alice Nyffenegger","Followers":44}
 ```
 
 {{% alert title="Note" color="primary" %}}
-Remember that other packages (e.g. [json](https://pkg.go.dev/encoding/json)) cannot access the struct fields if they are lower case. Be sure to make them public by upper casing the first letter.
 
-Try changing one struct field to lower case (e.g. `body string`) and see what happens.
+Other packages (e.g. [json](https://pkg.go.dev/encoding/json)) cannot access the struct fields if they are lower case. Be sure to make them public by upper casing the first letter.
+
 {{% /alert %}}
+
+
+### Tags
+
+Often the names in your struct and the names you want in the serialized JSON are not the same. With tags you can map certain struct fields to other field names in the JSON representation:
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
+type User struct {
+	Name      string `json:"short_name"`
+	FullName  string `json:"name"`
+	Followers int    `json:"followers"`
+}
+
+func main() {
+	user := User{
+		Name:      "Alice",
+		FullName:  "Alice Nyffenegger",
+		Followers: 44,
+	}
+
+	output, err := json.Marshal(user)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	fmt.Printf("%s\n", output)
+}
+<!--output-->
+{"short_name":"Alice","name":"Alice Nyffenegger","followers":44}
+```
 
 
 ## Decoding
 
-Decoding works similiarly with the [json.Unmarshal](https://pkg.go.dev/encoding/json#Unmarshal) function. In addition to the JSON string (as a byte slice) we also pass a pointer to the struct itself. Since we use a pointer the struct can be modified directly and is not returned by `Unmarshal`.
+Decoding works similiarly with the [json.Unmarshal](https://pkg.go.dev/encoding/json#Unmarshal) function. In addition to the JSON data (as a byte slice `[]byte`) we also pass a pointer to the struct itself. Since we use a pointer the struct can be modified directly and is not returned by `Unmarshal`.
 
-Byte slices are often used for performance reasons. Most functions in the standard library (e.g. reading files) return byte slices.
-
-The backticks around the json string help us pass quotes without escaping them. Otherwise we would have to escape every quote (`"\"Name\" ... "`).
+With backticks we can create multiline strings or strings which contain a lot of quotes (`"`) like JSON data.
 
 ```go
 package main
 
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
+type User struct {
+	Name      string `json:"short_name"`
+	FullName  string `json:"name"`
+	Followers int    `json:"followers"`
+}
+
 func main() {
-    type Message struct {
-        Name string
-        Body string
-        Time int64 `json:"unix_time"`
-    }
-    m := Message{}
-    data := []byte(`{"Name":"Alice","Body":"Hello","unix_time":1294706395881547000}`)
-    err := json.Unmarshal(data, &m)
-    if err != nil {
-        log.Fatal(err)
-    }
-    fmt.Println(m)
-    // Also print struct field names
-    fmt.Printf("%+v\n", m)
+        input := `{"short_name":"Alice","name":"Alice Nyffenegger","followers":44}`
+
+	user := User{}
+
+	err := json.Unmarshal([]byte(input), &user)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	fmt.Printf("%s %s %d\n", user.Name, user.FullName, user.Followers)
 }
 <!--output-->
-{Alice Hello 1294706395881547000}
-{Name:Alice Body:Hello Time:1294706395881547000}
+Alice Alice Nyffenegger 44
 ```

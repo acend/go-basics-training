@@ -36,55 +36,15 @@ Hello, file system
 ```
 
 
-## Directory listing
-
-```go
-package main
-
-import (
-    "fmt"
-    "log"
-    "os"
-)
-
-func main() {
-    files, err := os.ReadDir(".")
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    for _, file := range files {
-        fmt.Println(file.Name())
-    }
-}
-<!--output-->
-.dockerenv
-bin
-dev
-etc
-home
-lib
-lib64
-proc
-root
-sys
-tmp
-tmpfs
-usr
-var
-```
-
-
 ## Reader/Writer
 
 The above example of reading a file loads the whole file into memory. This can cause problems when we are dealing with large files. To solve this problem, we can load chunks of data and place them into a buffer.
 
-The Go standard library provides an interface for reading and writing. The functions we saw above also use these interfaces.
+The Go standard library provides the Reader and Writer interface for reading and writing data in a streaming fashion.
+The various reader and writer implementations are then often used together with the primitives from the [io](https://pkg.go.dev/io) package (e.g. [io.Copy](https://pkg.go.dev/io#Copy)).
 
 
-### Writer
-
-The [io.Writer](https://pkg.go.dev/io#Writer) interface expects a slice of bytes and returns the amount of bytes that were written.
+The [io.Writer](https://pkg.go.dev/io#Writer) interface expects a slice of bytes and returns the amount of bytes that were written and an error.
 
 ```go
 type Writer interface {
@@ -92,43 +52,7 @@ type Writer interface {
 }
 ```
 
-Here is an example using [os.File](https://pkg.go.dev/os#File), which implements the [io.Writer](https://pkg.go.dev/io#Writer) interface.
-
-```go
-package main
-
-func main() {
-    content := "Some file content"
-    file, err := os.Create("./io.txt")
-    if err != nil {
-        fmt.Println(err)
-        os.Exit(1)
-    }
-    defer file.Close()
-
-    n, err := file.Write([]byte(content))
-    if err != nil {
-        fmt.Println(err)
-        os.Exit(1)
-    }
-    if n != len(content) {
-        fmt.Println("failed to write data")
-        os.Exit(1)
-    }
-    fmt.Println("file write done")
-}
-<!--output-->
-file write done
-```
-
-
-### Reader
-
-The [io.Reader](https://pkg.go.dev/io#Reader) interface expects an empty byte slice. This slice is used as a buffer and returned as soon as it is filled.
-
-<!-- TODO: slice -> pointer -->
-
-The amount of bytes that were read and an error are also returned.
+The [io.Reader](https://pkg.go.dev/io#Reader) interface expects an byte slice. This slice is used as a buffer. It returns the amount of bytes that were read and an error.
 
 ```go
 type Reader interface {
@@ -136,26 +60,37 @@ type Reader interface {
 }
 ```
 
+Here is an example were we copy data from a [bytes.Buffer](https://pkg.go.dev/bytes#Buffer) to a file ([os.File](https://pkg.go.dev/os#File)).
+We create the buffer from a string using [bytes.NewBufferString](https://pkg.go.dev/bytes#NewBufferString).
+Then we open the file with [os.Create](https://pkg.go.dev/os#Create).
+With [io.Copy](https://pkg.go.dev/io#Copy) we copy all bytes from the buffer to the file.
+
 ```go
 package main
 
-func main() {
-    file, err := os.Open("./io.txt")
-    if err != nil {
-        fmt.Println(err)
-        os.Exit(1)
-    }
-    defer file.Close()
+import (
+	"bytes"
+	"fmt"
+	"io"
+	"os"
+)
 
-    p := make([]byte, 4)
-    for {
-        n, err := file.Read(p)
-        if err == io.EOF {
-            break
-        }
-        fmt.Print(string(p[:n]))
-    }
+func main() {
+	// buffer implements io.Reader and is our source
+	buffer := bytes.NewBufferString("Some file content")
+
+	// file implements io.Writer and is our destination
+	file, err := os.Create("./io.txt")
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	defer file.Close()
+
+	// reades bytes from buffer and writes them to file
+	n, err := io.Copy(file, buffer)
+	fmt.Printf("%d bytes written\n", n)
 }
 <!--output-->
-open ./io.txt: no such file or directory
+17 bytes written
 ```
