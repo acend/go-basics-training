@@ -4,7 +4,10 @@ weight: 9250
 ---
 
 
-## General
+## Part 1: Ping and Logger
+
+
+### Tasks
 
 1. Run a server and implement a handler which returns `pong` on the endpoint `/ping`.
 2. Create a middleware to log every request. Log the path, method, duration and the IP of the client of the request.
@@ -14,23 +17,35 @@ Your log should look similar to this:
 2022/04/11 10:03:08 remote=192.168.1.143 path=/foo method=GET duration=13.765874ms
 ```
 
-Tips:
+
+### Tips
+
+See {{<link "http-server" >}}.
+
+{{%details title="Standard library packages"%}}
 
 * Consider using the [log](https://pkg.go.dev/log) package from the standard library
 * You can measure time using the [time](https://pkg.go.dev/time) package:
 
+{{%/details%}}
+
+{{%details title="Measure duration"%}}
 ```golang
 start := time.Now()
 
-// time consuming action
+// perform action
 
 duration := time.Now().Sub(start)
 ```
+{{%/details%}}
 
 
-## User API
+## Part 2: User API
 
-* Create a JSON REST-like API where you can create, list, get and delete users.
+
+### Tasks
+
+Create a JSON REST API where you can create, list and delete users.
 
 The API should provide the following endpoints:
 
@@ -39,7 +54,7 @@ The API should provide the following endpoints:
 * `GET /user/<ID>`: returns a single user by ID
 * `DELETE /user/<ID>`: delete user by ID
 
-The user should look at least like this:
+The user should look like this:
 ```
 {
     "name": "john",
@@ -48,24 +63,44 @@ The user should look at least like this:
 }
 ```
 
-You can decide how you would like to store the users. One option would be to store them only in memory for example in a map `map[int]User`. Another option would be to store serialize the users into a file (e.g. with JSON).
+You can decide how you would like to store the users. One option would be to store them only in-memory for example in a map `map[int]User`. Another option would be to store serialize the users into a file (e.g. with JSON).
 
-* Create the appropriate client implementation to create users
 
-For this you could write a CLI tool which takes the username as argument and the full name and the followers as option:
+### Tips
 
+See {{<link "http-server" >}}.
+
+
+## Part 3: User API Client
+
+
+### Tasks
+
+Create CLI tool to list, create and delete users:
+
+```bash
+# create user
+./usercli create bob
+./usercli create bob "Bob Meier"
+./usercli create bob "Bob Meier" 34
+
+# list all users
+./usercli get 
+
+# show specific user
+./usercli get bob
+
+# delete user
+./usercli delete bob
 ```
-./usercli alice
-./usercli bob -full "Bob Miller" -followers 34
-```
-
-* Add HTTP basic authentication to the whole user API
-
-You can do this best if you wrap the API handlers in a appropriate middleware. For the authentication you can use a static username password pair like `admin` and `secret`. You can also try to make them configurable using flags or environment variables.
-
-* Implement a fallback machanism on the get user by id endpoint (`GET /user/<ID>`) if a user does not exist. In that case try to fetch the user from a third party source like Github, Gitlab. If the users does exist there save it into your internal store and return that user.
 
 
-## Solution
+### Tips
 
-https://github.com/acend/go-basics-training-examples/tree/master/http-server
+Take a look at the [github-info-client](https://github.com/acend/go-basics-training-examples/tree/master/github-info-client) example to get an idea on how to implement this.
+
+
+## Solutions
+
+* Part 1: Ping and Log Middleware: https://github.com/acend/go-basics-training-examples/tree/master/http-server
+* Part 2 + 3: User API: https://github.com/acend/go-basics-training-examples/tree/master/user-api
