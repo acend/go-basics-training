@@ -84,7 +84,7 @@ resp, err := client.Do(req)
 ```
 
 
-## JSON
+## Send JSON
 
 Often we want to send a struct serialized as JSON to an endpoint. The following example sends `{"name":"execute"}` as payload.
 
@@ -110,4 +110,42 @@ if err != nil {
 req.Header.Set("Content-Type", "application/json")
 
 resp, err := client.Do(req)
+```
+
+
+## Receive JSON
+
+```golang
+client := &http.Client{
+	Timeout: time.Second * 20,
+}
+
+type action struct {
+	Name string `json:"name"`
+}
+
+req, err := http.NewRequest("POST", "http://localhost:8080/run", nil)
+if err != nil {
+	return err
+}
+
+resp, err := client.Do(req)
+if err != nil {
+	return err
+}
+
+if resp.StatusCode > 399 {
+	return fmt.Errorf("http status code %d", resp.StatusCode)
+}
+
+// we wrap the resp.Body reader in a io.LimitReader to avoid a crash if the server sends too much content
+data, err := io.ReadAll(io.LimitReader(resp.Body, 1000))
+
+// initialize an action
+a := action{}
+
+// deserialize data into a
+err = json.Unmarshal(data, &a)
+
+fmt.Println("action", a.Name)
 ```
