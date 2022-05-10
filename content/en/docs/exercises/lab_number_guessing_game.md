@@ -34,7 +34,7 @@ line, err := bufio.NewReader(os.Stdin).ReadString('\n')
 The [strings](https://pkg.go.dev/strings) package contains various functions to work with strings. For example [strings.TrimSpace](https://pkg.go.dev/strings#TrimSpace) to remove whithspace characters (spaces, newlines, etc.) from strings.
 
 ```golang
-line = strings.TrimSprace(line)
+line = strings.TrimSpace(line)
 ```
 {{%/details%}}
 
