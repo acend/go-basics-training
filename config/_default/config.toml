@@ -91,6 +91,9 @@ offlineSearch = true
 
 automaticSectionNumbers = true
 
+[params.pdf]
+title="Go Basics Training"
+
 [params.ui]
 # Enable to show the side bar menu in its compact state.
 sidebar_menu_compact = false
