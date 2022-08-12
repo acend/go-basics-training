@@ -1,5 +1,5 @@
-{{ $query := slice "body" .code }}
-{{ if hasPrefix .code "package" }}
+{{ $query := slice "body" . }}
+{{ if hasPrefix . "package" }}
     {{ $query = $query | append (slice "imports" "true") }}
 {{ end }}
 {{ $opts := dict
@@ -11,9 +11,8 @@
 {{ $content := $postResponse.Content | transform.Unmarshal }}
 {{ $output := $content.Body }}
 {{ if $content.Error }}
-  {{ warnf "Golang format error occurred in %v:%v:\n%v" .this.Page.File.Path .this.Position.LineNumber $content.Error }}
   {{/* If fmt returns an error the output is empty */}}
   {{/* Inserting wrong code is better than no code */}}
-  {{ $output = .code }}
+  {{ $output = . }}
 {{ end }}
-{{ return $output }}
+{{ return (dict "output" $output "err" $content.Error) }}

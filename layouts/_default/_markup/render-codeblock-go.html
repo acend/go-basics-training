@@ -17,19 +17,33 @@
 {{ $compareOutputEnabled := .Attributes.compareoutput | default true }}
 {{ $displayOutputEnabled := .Attributes.displayoutput | default true }}
 
+{{ $err := "" }}
+
 {{ if $fmtEnabled }}
-    {{ $code = partial "go-playground/fmt.html" (dict "this" . "code" $code) }}
+    {{ $fmtResponse := partial "go-playground/fmt.html" $code }}
+    {{ $code = index $fmtResponse "output" }}
+    {{/* If there is an error, we do not compile the code */}}
+    {{ $err = index $fmtResponse "err" }}
+    {{ if $err }}
+        {{ warnf "Golang format error occurred in %v:%v:\n%v" .Page.File.Path .Position.LineNumber $err }}
+    {{ end }}
 {{ end }}
 
 {{ $share := "" }}
-{{ if $playgroundEnabled }}
+{{ if and $playgroundEnabled (not $err) }}
     {{ .Page.Store.Set "hasGoPlayground" true }}
     {{ $share = partial "go-playground/share.html" $code }}
 
     {{/* We call compile, even if we do not need the output,
          because it also throws an error if the Go syntax is incorrect. */}}
-    {{ $compiledOutput := partial "go-playground/compile.html" (dict "this" . "code" $code) }}
-    {{ if and $compareOutputEnabled (ne $compiledOutput $output) }}
+    {{ $compileResponse := partial "go-playground/compile.html" $code }}
+    {{ $compiledOutput := index $compileResponse "output" }}
+    {{ $err = index $compileResponse "err" }}
+    {{/* If there is an error, we do not compare the compiled output, because it is always empty */}}
+    {{ if $err }}
+        {{ warnf "Golang error occurred in %v:%v:\n%v" .Page.File.Path .Position.LineNumber $err }}
+    {{ end }}
+    {{ if and $compareOutputEnabled (ne $compiledOutput $output) (not $err) }}
       {{ if $output }}
         {{ warnf "Wrong output received from Go Playground in %v:%v:\ngot:\n%vwant:\n%v" .Page.File.Path .Position.LineNumber $compiledOutput $output }}
       {{ else }}
