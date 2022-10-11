@@ -1,12 +1,12 @@
 {{ $split := split .Inner "<!--output-->" }}
 {{ $code := index $split 0 }}
 {{ $code = trim $code "\n" }}
-{{ $output := "" }}
+{{ $expectedOutput := "" }}
 {{ if eq (len $split) 2 }}
-    {{ $output = index $split 1 }}
-    {{ $output = strings.TrimPrefix "\n" $output }}
+    {{ $expectedOutput = index $split 1 }}
+    {{ $expectedOutput = strings.TrimPrefix "\n" $expectedOutput }}
     {{/* It seems the last newline is stripped when using code render blocks */}}
-    {{ $output = add $output "\n" }}
+    {{ $expectedOutput = add $expectedOutput "\n" }}
 {{ end }}
 
 {{ $playgroundEnabled := .Attributes.playground | default (hasPrefix $code "package main") }}
@@ -18,23 +18,63 @@
 {{ $displayOutputEnabled := .Attributes.displayoutput | default true }}
 
 {{ if $fmtEnabled }}
-    {{ $code = partial "go-playground/fmt.html" (dict "this" . "code" $code) }}
+    {{ $fmtQuery := slice "body" $code }}
+    {{ if hasPrefix $code "package" }}
+        {{ $fmtQuery = $fmtQuery | append (slice "imports" "true") }}
+    {{ end }}
+    {{ $fmtOpts := dict
+      "method" "post"
+      "headers" (dict "Content-Type" "application/x-www-form-urlencoded")
+      "body" (querify $fmtQuery)
+    }}
+    {{ $fmtResponse := resources.GetRemote "https://go.dev/_/fmt" $fmtOpts }}
+    {{ $fmtContent := $fmtResponse.Content | transform.Unmarshal }}
+
+    {{ if $fmtContent.Error }}
+        {{ warnf "Golang format error occurred in %v:%v:\n%v" .Page.File.Path .Position.LineNumber $fmtContent.Error }}
+        {{/* If there is an error, we do not compile the code */}}
+        {{ $playgroundEnabled = false }}
+    {{ else }}
+        {{ $code = $fmtContent.Body }}
+    {{ end }}
 {{ end }}
 
-{{ $share := "" }}
+{{ $shareContent := "" }}
 {{ if $playgroundEnabled }}
     {{ .Page.Store.Set "hasGoPlayground" true }}
-    {{ $share = partial "go-playground/share.html" $code }}
+
+    {{ $shareOpts := dict
+      "method" "post"
+      "body" $code
+    }}
+    {{ $shareResponse := resources.GetRemote "https://go.dev/_/share" $shareOpts }}
+    {{ $shareContent = $shareResponse.Content }}
 
     {{/* We call compile, even if we do not need the output,
          because it also throws an error if the Go syntax is incorrect. */}}
-    {{ $compiledOutput := partial "go-playground/compile.html" (dict "this" . "code" $code) }}
-    {{ if and $compareOutputEnabled (ne $compiledOutput $output) }}
-      {{ if $output }}
-        {{ warnf "Wrong output received from Go Playground in %v:%v:\ngot:\n%vwant:\n%v" .Page.File.Path .Position.LineNumber $compiledOutput $output }}
-      {{ else }}
-        {{ warnf "Received unexpected output from Go Playground. Add an `<!--output-->` block in %v:%v:\ngot:\n%v" .Page.File.Path .Position.LineNumber $compiledOutput }}
-      {{ end }}
+
+    {{ $compileQuery := slice "version" "2" "body" $code "withVet" "true" }}
+    {{ $compileOpts := dict
+      "method" "post"
+      "headers" (dict "Content-Type" "application/x-www-form-urlencoded")
+      "body" (querify $compileQuery)
+    }}
+    {{ $compileResponse := resources.GetRemote "https://go.dev/_/compile" $compileOpts }}
+    {{ $compileContent := $compileResponse.Content | transform.Unmarshal }}
+    {{ $compileOutput := "" }}
+    {{ range $compileContent.Events }}
+        {{ $compileOutput = printf "%s%s" $compileOutput .Message }}
+    {{ end }}
+    {{ if $compileContent.Errors }}
+        {{ warnf "Golang error occurred in %v:%v:\n%v" .Page.File.Path .Position.LineNumber $compileContent.Errors }}
+    {{ else }}
+        {{ if and $compareOutputEnabled (ne $compileOutput $expectedOutput) }}
+          {{ if $expectedOutput }}
+            {{ warnf "Wrong output received from Go Playground in %v:%v:\ngot:\n%vwant:\n%v" .Page.File.Path .Position.LineNumber $compileOutput $expectedOutput }}
+          {{ else }}
+            {{ warnf "Received unexpected output from Go Playground. Add an `<!--output-->` block in %v:%v:\ngot:\n%v" .Page.File.Path .Position.LineNumber $compileOutput }}
+          {{ end }}
+        {{ end }}
     {{ end }}
 {{ end }}
 
@@ -49,7 +89,7 @@
     {{ $options = $options | append (printf "lineNos=%v" .) }}
 {{ end }}
 
-<div {{ if $playgroundEnabled }}class="go-playground" data-playground="{{ $share }}"{{ end }}>
+<div {{ if $playgroundEnabled }}class="go-playground" data-playground="{{ $shareContent }}"{{ end }}>
 
 {{/* We add something to each empty line and remove it after highlighting */}}
 {{/* https://github.com/gohugoio/hugo/issues/7848 */}}
@@ -57,10 +97,10 @@
 {{ $highlighted := transform.Highlight $code "go" (delimit $options ",") }}
 {{- replace $highlighted "__NL__" "" | safeHTML -}}
 
-{{ if and $displayOutputEnabled $output }}
+{{ if and $displayOutputEnabled $expectedOutput }}
 <pre class="output">
 <span>Output:</span>
-{{ trim $output "\n" }}
+{{ trim $expectedOutput "\n" }}
 </pre>
 {{ end }}
 
