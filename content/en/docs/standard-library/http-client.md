@@ -10,7 +10,8 @@ In the following sections we learn how we can use the HTTP client.
 ## Quick start
 
 The following example shows how we can perform a GET request and print the body to the standard output.
-```golang{playground=false}
+
+```go {playground=false}
 package main
 
 import (
@@ -32,8 +33,8 @@ func main() {
 		os.Exit(1)
 	}
 }
-
 ```
+
 The function [http.Get](https://pkg.go.dev/net/http#Get) returns a [http.Response](https://pkg.go.dev/net/http#Response).
 The response contains the field `Body` which is an `io.Reader` from which we can read the response.
 
