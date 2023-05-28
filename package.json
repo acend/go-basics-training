@@ -20,7 +20,7 @@
   "devDependencies": {
     "husky": "8.0.3",
     "lint-staged": "13.2.0",
-    "markdownlint-cli": "0.33.0"
+    "markdownlint-cli": "0.34.0"
   },
   "lint-staged": {
     "*.md": "markdownlint --config .markdownlint.json --fix"
