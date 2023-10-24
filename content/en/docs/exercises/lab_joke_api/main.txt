@@ -1,0 +1,61 @@
+// If you want to create an executable binary,
+// you must name your package `main`.
+// By using another name, you create a library.
+package main
+
+// Import external modules that you would like to use
+import (
+	"encoding/json" // JSON encoding and decoding
+	"fmt"           // Formatting
+	"io"            // Input/Output
+	"net/http"      // HTTP requests
+	"os"            // Operating System
+)
+
+type joke struct {
+	Type string
+	// The json key can be overridden
+	Message string `json:"setup"`
+}
+
+// The main function is called when executing the binary
+func main() {
+	// Variables are declared using `:=`
+	// The type is automatically evaluated and cannot be modified
+	url := "https://official-joke-api.appspot.com/random_joke"
+	// The following will not work:
+	// url = 9
+
+	// Output a string to the terminal
+	// %v detects the variable type. You may also use %s for strings and %d for digits
+	fmt.Printf("Requesting joke from %v\n", url)
+	// The following would also work:
+	// fmt.Println("Requesting joke from", url)
+
+	// Functions can return multiple results!
+	// The variable names can be freely modified,
+	// but using `err` for the error result is a convention.
+	res, err := http.Get(url)
+	// If the error is not nil, it means an error has occurred
+	if err != nil {
+		fmt.Printf("Error making http request: %v\n", err)
+		// Exit the program with statuscode 1
+		os.Exit(1)
+	}
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		fmt.Printf("Error reading response body: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Printf("Body: %s\n", body)
+
+	// Initialize a new instance of the joke struct
+	j := joke{}
+	// Pass a pointer of j to json.Unmarshal
+	err = json.Unmarshal(body, &j)
+	if err != nil {
+		fmt.Printf("Error decoding body: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Printf("%+v", j)
+}
