@@ -16,9 +16,11 @@ Try and solve the following. Every task has links to relevant documentation.
 6. Write another program that [reads](https://pkg.go.dev/os#ReadFile) a [json file](https://github.com/15Dkatz/official_joke_api/blob/master/jokes/index.json) and picks a [random](https://pkg.go.dev/math/rand#Intn) joke
 7. Implement a [HTTP Server](/docs/standard-library/http-server/) that serves the picked joke
 8. Add a new endpoint that expects a joke and [persists](/docs/standard-library/io/) it
+9. Update your program from part one so that you can configure the URL (maybe as another flag) and query your own API
 
-### Use an API
-9. Write another program that asks the user to enter a joke on the command line (standard input) and [sends](/docs/standard-library/http-client/) it to your own API.
+### Add jokes
+10. Extend your HTTP Server that you can send a joke to it which gets persisted (POST request)
+11. Extend your program from part one that it supports adding new jokes. For this ask the user to enter a joke on the command line (standard input) and [send](/docs/standard-library/http-client/) it to your own API.
 
 
 ## Tips
