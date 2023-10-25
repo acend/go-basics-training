@@ -3,6 +3,8 @@ title: "Joke API"
 weight: 9151
 ---
 
+## Task
+
 Try and solve the following. Every task has links to relevant documentation.
 
 ### Request an API
@@ -15,19 +17,11 @@ Try and solve the following. Every task has links to relevant documentation.
 ### Build an API
 6. Write another program that [reads](https://pkg.go.dev/os#ReadFile) a [json file](https://github.com/15Dkatz/official_joke_api/blob/master/jokes/index.json) and picks a [random](https://pkg.go.dev/math/rand#Intn) joke
 7. Implement a [HTTP Server](/docs/standard-library/http-server/) that serves the picked joke
-8. Add a new endpoint that expects a joke and [persists](/docs/standard-library/io/) it
-9. Update your program from part one so that you can configure the URL (maybe as another flag) and query your own API
+8. Update your program from part one so that you can configure the URL (maybe as another flag) and query your own API
 
 ### Add jokes
-10. Extend your HTTP Server that you can send a joke to it which gets persisted (POST request)
-11. Extend your program from part one that it supports adding new jokes. For this ask the user to enter a joke on the command line (standard input) and [send](/docs/standard-library/http-client/) it to your own API.
-
-
-## Tips
-
-{{%details title="Project structure"%}}
-You cannot have multiple `main` functions in a single directory. If you want to create multiple binaries, these must be separated into different directories. By convention the directory equals the binary name and is located under `cmd/` (e.g. `cmd/request-joke/main.go`).
-{{%/details%}}
+9. Extend your HTTP Server that you can send a joke to it which gets [persisted](/docs/standard-library/io/) (POST request)
+10. Extend your program from part one that it supports adding new jokes. For this ask the user to enter a joke on the command line (standard input) and [send](/docs/standard-library/http-client/) it to your own API.
 
 {{%details title="Prompt for input on the command line (standard input)"%}}
 With the [bufio](https://pkg.go.dev/bufio) package we can read from the standard input ([os.Stdin](https://pkg.go.dev/os#Stdin)) until a certain character occurs:
@@ -42,3 +36,9 @@ The [strings](https://pkg.go.dev/strings) package contains various functions to 
 line = strings.TrimSpace(line)
 ```
 {{%/details%}}
+
+## Solution
+
+[Client](https://github.com/acend/go-basics-training-examples/tree/master/joke-api-client)
+
+[Server](https://github.com/acend/go-basics-training-examples/tree/master/joke-api-server)
