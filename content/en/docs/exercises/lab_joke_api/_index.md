@@ -7,19 +7,25 @@ weight: 9151
 
 Try and solve the following. Every task has links to relevant documentation.
 
+
 ### Request an API
+
 1. Begin with the following [main.go](main.txt) which requests a joke from https://official-joke-api.appspot.com/random_joke and decodes it into a Go struct.
 2. Refactor the HTTP request into another [function](/docs/basics/functions/) that returns `joke, error`
 3. Update the code to also [decode](/docs/standard-library/json/) and print the punchline
 4. [Delay](https://pkg.go.dev/time#Sleep) the punchline by a few seconds
 5. Make the delay configurable with a `--delay 10` [flag](https://pkg.go.dev/flag)
 
+
 ### Build an API
+
 6. Write another program that [reads](https://pkg.go.dev/os#ReadFile) a [json file](https://github.com/15Dkatz/official_joke_api/blob/master/jokes/index.json) and picks a [random](https://pkg.go.dev/math/rand#Intn) joke
 7. Implement a [HTTP Server](/docs/standard-library/http-server/) that serves the picked joke
 8. Update your program from part one so that you can configure the URL (maybe as another flag) and query your own API
 
+
 ### Add jokes
+
 9. Extend your HTTP Server that you can send a joke to it which gets [persisted](/docs/standard-library/io/) (POST request)
 10. Extend your program from part one that it supports adding new jokes. For this ask the user to enter a joke on the command line (standard input) and [send](/docs/standard-library/http-client/) it to your own API.
 
@@ -36,6 +42,7 @@ The [strings](https://pkg.go.dev/strings) package contains various functions to 
 line = strings.TrimSpace(line)
 ```
 {{%/details%}}
+
 
 ## Solution
 
