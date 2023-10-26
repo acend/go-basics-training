@@ -8,7 +8,7 @@ weight: 9151
 Try and solve the following. Every task has links to relevant documentation.
 
 
-### Request an API
+### API Client
 
 1. Begin with the following [main.go](main.txt) which requests a joke from https://official-joke-api.appspot.com/random_joke and decodes it into a Go struct.
 2. Refactor the HTTP request into another [function](/docs/basics/functions/) that returns `joke, error`
@@ -17,7 +17,7 @@ Try and solve the following. Every task has links to relevant documentation.
 5. Make the delay configurable with a `--delay 10` [flag](https://pkg.go.dev/flag)
 
 
-### Build an API
+### API Server
 
 6. Write another program that [reads](https://pkg.go.dev/os#ReadFile) a [json file](https://github.com/15Dkatz/official_joke_api/blob/master/jokes/index.json) and picks a [random](https://pkg.go.dev/math/rand#Intn) joke
 7. Implement a [HTTP Server](/docs/standard-library/http-server/) that serves the picked joke
