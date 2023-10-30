@@ -37,6 +37,10 @@ The first time you open a Go file the Go plugin will show a warning to you that 
 
 ![VS Code Go Extension Error Message](images/vs_code_golang_extension_error_message.png)
 
+{{% alert title="Auto Save" color="info" %}}
+We recommend setting the "Auto Save" setting to `onFocusChanged`. This allows you to modify code and then run it, without manually saving.
+{{% /alert %}}
+
 
 ## Hello World
 
