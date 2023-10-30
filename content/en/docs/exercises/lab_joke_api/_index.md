@@ -37,6 +37,7 @@ For more information why `5 * time.Second` works see:
 https://stackoverflow.com/a/49498375
 {{%/details%}}
 
+
 ### API Server
 
 6. Write another program that [reads](https://pkg.go.dev/os#ReadFile) a [json file](https://github.com/15Dkatz/official_joke_api/blob/master/jokes/index.json) and picks a [random](https://pkg.go.dev/math/rand#Intn) joke. You will need to use [slices](/docs/basics/slices)
