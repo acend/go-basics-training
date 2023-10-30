@@ -16,10 +16,30 @@ Try and solve the following. Every task has links to relevant documentation.
 4. [Delay](https://pkg.go.dev/time#Sleep) the punchline by a few seconds
 5. Make the delay configurable with a `--delay 10` [flag](https://pkg.go.dev/flag)
 
+{{%details title="Some tips regarding flags"%}}
+We recommend using [flag.IntVar](https://pkg.go.dev/flag#IntVar), instead of [flag.Int](https://pkg.go.dev/flag#Int). Both variants work, but with [flag.IntVar](https://pkg.go.dev/flag#IntVar) you end up with a normal variable, instead of a [pointer](/docs/basics/pointers/). You may also try using [flag.DurationVar](https://pkg.go.dev/flag#DurationVar).
+
+To learn more about the `*int` type, see {{< link "content/en/docs/basics/pointers.md" >}}.
+
+Do not forget to run [flag.Parse()](https://pkg.go.dev/flag#Parse) after defining the flags.
+{{%/details%}}
+{{%details title="Error: mismatched types int and time.Duration"%}}
+When solving the last task, you might receive the error: `mismatched types int and time.Duration`. This is because you cannot multiply different types. You must first convert the value to the same type.
+
+```go
+i := 42
+f := float64(i)
+u := uint(f)
+d := time.Duration(u)
+```
+
+For more information why `5 * time.Second` works see:
+https://stackoverflow.com/a/49498375
+{{%/details%}}
 
 ### API Server
 
-6. Write another program that [reads](https://pkg.go.dev/os#ReadFile) a [json file](https://github.com/15Dkatz/official_joke_api/blob/master/jokes/index.json) and picks a [random](https://pkg.go.dev/math/rand#Intn) joke
+6. Write another program that [reads](https://pkg.go.dev/os#ReadFile) a [json file](https://github.com/15Dkatz/official_joke_api/blob/master/jokes/index.json) and picks a [random](https://pkg.go.dev/math/rand#Intn) joke. You will need to use [slices](/docs/basics/slices)
 7. Implement a [HTTP Server](/docs/standard-library/http-server/) that serves the picked joke
 8. Update your program from part one so that you can configure the URL (maybe as another flag) and query your own API
 
