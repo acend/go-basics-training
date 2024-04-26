@@ -38,6 +38,13 @@ Run the following command to update all modules with their newest upstream versi
 hugo mod get -u
 ```
 
+Command without hugo installation:
+
+```bash
+export HUGO_VERSION=$(grep "FROM docker.io/floryn90/hugo" Dockerfile | sed 's/FROM docker.io\/floryn90\/hugo://g' | sed 's/ AS builder//g')
+docker run --rm --interactive -v $(pwd):/src docker.io/floryn90/hugo:${HUGO_VERSION} mod get -u
+```
+
 
 ## Build production image locally
 
@@ -108,15 +115,15 @@ To develop locally we don't want to rebuild the entire container image every tim
 We simply mount the working directory into a running container, where hugo is started in the server mode.
 
 ```bash
-export HUGO_VERSION=$(grep "FROM klakegg/hugo" Dockerfile | sed 's/FROM klakegg\/hugo://g' | sed 's/ AS builder//g')
-docker run --rm --publish 8080:8080 --volume $(pwd):/src klakegg/hugo:${HUGO_VERSION} server --port 8080
+export HUGO_VERSION=$(grep "FROM floryn90/hugo" Dockerfile | sed 's/FROM floryn90\/hugo://g' | sed 's/ AS builder//g')
+docker run --rm --publish 8080:8080 --volume $(pwd):/src floryn90/hugo:${HUGO_VERSION} server --port 8080
 ```
 
 Use the following command to set the hugo environment
 
 ```bash
-export HUGO_VERSION=$(grep "FROM klakegg/hugo" Dockerfile | sed 's/FROM klakegg\/hugo://g' | sed 's/ AS builder//g')
-docker run --rm --publish 8080:8080 --volume $(pwd):/src klakegg/hugo:${HUGO_VERSION} server --port 8080 --environment=<environment>
+export HUGO_VERSION=$(grep "FROM floryn90/hugo" Dockerfile | sed 's/FROM floryn90\/hugo://g' | sed 's/ AS builder//g')
+docker run --rm --publish 8080:8080 --volume $(pwd):/src floryn90/hugo:${HUGO_VERSION} server --port 8080 --environment=<environment>
 ```
 
 
@@ -135,8 +142,8 @@ npm run mdlint
 Npm not installed? no problem
 
 ```bash
-export HUGO_VERSION=$(grep "FROM klakegg/hugo" Dockerfile | sed 's/FROM klakegg\/hugo://g' | sed 's/ AS builder//g')
-docker run --rm -v $(pwd):/src klakegg/hugo:${HUGO_VERSION}-ci /bin/bash -c "npm install && npm run mdlint"
+export HUGO_VERSION=$(grep "FROM floryn90/hugo" Dockerfile | sed 's/FROM floryn90\/hugo://g' | sed 's/ AS builder//g')
+docker run --rm -v $(pwd):/src floryn90/hugo:${HUGO_VERSION}-ci /bin/bash -c "npm install && npm run mdlint"
 ```
 
 
