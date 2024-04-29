@@ -7,6 +7,9 @@ languageCode = "en-us"
 
 contentDir = "content/en"
 
+# This is required the first time until the cache is built
+timeout = "5m"
+
 [minify]
 disableSVG = true
 

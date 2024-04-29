@@ -1,5 +1,5 @@
 /* import variables from docsy */
-@import 'variables';
+@import 'variables_forward';
 
 /* copy button */
 .highlight {
@@ -23,5 +23,5 @@
     text-align: center;
 }
 .highlight-run-btn:hover {
-    background-color: $gray-700;
+//    background-color: $gray-700;  // TODO fix
 }
