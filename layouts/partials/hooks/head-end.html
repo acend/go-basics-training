@@ -1,7 +1,6 @@
 {{ $options := dict "enableSourceMap" .Site.IsServer }}
 
-{{ $siteCSS := resources.Get "scss/site.scss" | toCSS $options }}
-{{ $playgroundCSS := resources.Get "scss/go-playground.scss" | toCSS $options }}
+{{ $css := resources.Get "scss/go-playground.scss" | toCSS $options }}
 
 <style>
 a.godoc {
@@ -20,7 +19,6 @@ a.godoc {
 }
 </style>
 
-{{ $css := slice $siteCSS $playgroundCSS | resources.Concat "bundle.css" }}
 {{ if not .Site.IsServer }}
     {{ $css = $css | postCSS | minify }}
 {{ end }}
