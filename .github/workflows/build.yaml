@@ -38,7 +38,7 @@ jobs:
           key: resources
       -
         name: Build Latest Version (cache)
-        uses: floryn90/actions-hugo@1.0.0
+        uses: floryn90/actions-hugo@1.0.1
         with:
           version: 0.124.1
           image: ext-ubuntu
