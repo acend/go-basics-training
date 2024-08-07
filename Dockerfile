@@ -8,7 +8,7 @@ RUN hugo --environment ${TRAINING_HUGO_ENV} --minify
 
 RUN mkdir /src/public/pdf/images/ && find /src/public/docs/ -regex '.*\(jpg\|jpeg\|png\|gif\)' -exec cp "{}" /src/public/pdf/images/ \; 
 
-FROM ubuntu:jammy AS wkhtmltopdf
+FROM ubuntu:noble AS wkhtmltopdf
 RUN apt-get update \
     && apt-get install -y curl \
     && curl -L https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb --output wkhtmltox_0.12.6.1-2.jammy_amd64.deb \
