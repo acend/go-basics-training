@@ -19,7 +19,7 @@
   "homepage": "https://github.com/acend/go-basics-training#readme",
   "devDependencies": {
     "husky": "9.1.4",
-    "lint-staged": "15.2.7",
+    "lint-staged": "15.2.8",
     "markdownlint-cli": "0.38.0"
   },
   "lint-staged": {
